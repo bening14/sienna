@@ -42,6 +42,32 @@
   <script src="<?= base_url('assets/') ?>assets/vendor/js/template-customizer.js"></script>
   <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
   <script src="<?= base_url('assets/') ?>assets/js/front-config.js"></script>
+
+  <style>
+    .bg {
+      /* The image used */
+      background-image: url("<?= base_url('assets/assets/img/um.jpg') ?>");
+
+      /* Full height */
+      height: 100%;
+
+      /* Center and scale the image nicely */
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
+    .center {
+      margin: auto;
+      width: 40%;
+      padding: 15px;
+      margin-top: 10%;
+    }
+
+    .card-block {
+      background-color: rgba(245, 245, 245, 0.8);
+    }
+  </style>
 </head>
 
 <body>
@@ -59,7 +85,7 @@
             <i class="ti ti-menu-2 ti-sm align-middle"></i>
           </button>
           <!-- Mobile menu toggle: End-->
-          <a href="landing-page.html" class="app-brand-link">
+          <a href="<?= base_url() ?>" class="app-brand-link">
             <span class="app-brand-logo demo">
               <svg width="32" height="22" viewBox="0 0 32 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M0.00172773 0V6.85398C0.00172773 6.85398 -0.133178 9.01207 1.98092 10.8388L13.6912 21.9964L19.7809 21.9181L18.8042 9.88248L16.4951 7.17289L9.23799 0H0.00172773Z" fill="#7367F0" />
@@ -79,16 +105,10 @@
           </button>
           <ul class="navbar-nav me-auto">
             <li class="nav-item">
-              <a class="nav-link fw-medium" aria-current="page" href="#landingHero">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link fw-medium" href="#apaitusienna">Apa itu ?</a>
-            </li>
-            <li class="nav-item">
               <a class="nav-link fw-medium" href="#ebook">E-Book</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link fw-medium" href="#bibliotherapist">Bibliotherapist</a>
+              <a class="nav-link fw-medium" href="#bibliotherapist">Therapist</a>
             </li>
             <li class="nav-item">
               <a class="nav-link fw-medium" href="#selftasessment">Self Asessment</a>
@@ -97,7 +117,7 @@
               <a class="nav-link fw-medium" href="#artikel">Artikel</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link fw-medium" href="#bibliotheraphysessions">Bibliother</a>
+              <a class="nav-link fw-medium" href="#bibliotheraphysessions">Sesi Bibliotherapy</a>
             </li>
           </ul>
         </div>
@@ -146,7 +166,7 @@
 
   <div data-bs-spy="scroll" class="scrollspy-example">
     <!-- Hero: Start -->
-    <section id="hero-animation">
+    <!-- <section id="hero-animation">
       <div id="landingHero" class="section-py landing-hero position-relative">
         <div class="container">
           <div class="hero-text-box text-center">
@@ -172,8 +192,35 @@
         </div>
       </div>
       <div class="landing-hero-blank"></div>
-    </section>
+    </section> -->
     <!-- Hero: End -->
+
+    <section id="hero-animation">
+      <!-- <div id="landingHero" class="section-py landing-hero position-relative"> -->
+      <div id="landingHero" class="section-py position-relative bg">
+        <div class="container">
+          <div class="hero-text-box text-center pt-5" style="height: 560px;">
+            <div class="card card-block center">
+              <h1 class="text-primary hero-title display-6 fw-bold">SIENNA</h1>
+              <h2 class="hero-sub-title h6 mb-4 pb-1">
+                <strong>Model Aplikasi E-Bibliotherapy System Berbasis Web<br class="d-none d-lg-block" />
+                  Sebagai Media Literasi Kesehatan Mental Mahasiswa.</strong>
+              </h2>
+              <div>
+                <a href="#apaitusienna" class="btn btn-primary">Selengkapnya</a>
+              </div>
+              <!-- <div class="landing-hero-btn d-inline-block position-relative">
+              <span class="hero-btn-item position-absolute d-none d-md-flex text-heading">Join community
+                <img src="<?= base_url('assets/') ?>assets/img/front-pages/icons/Join-community-arrow.png" alt="Join community arrow" class="scaleX-n1-rtl" /></span>
+              <a href="#landingPricing" class="btn btn-primary btn-lg">Selengkapnya</a>
+            </div> -->
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <!-- <div class="landing-hero-blank"></div> -->
+    </section>
 
     <!-- FAQ: Start -->
     <section id="apaitusienna" class="section-py landing-faq">
