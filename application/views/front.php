@@ -82,7 +82,7 @@
               <a class="nav-link fw-medium" aria-current="page" href="#landingHero">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link fw-medium" href="#apaitusienna">Apa itu Sienna ?</a>
+              <a class="nav-link fw-medium" href="#apaitusienna">Apa itu ?</a>
             </li>
             <li class="nav-item">
               <a class="nav-link fw-medium" href="#ebook">E-Book</a>
@@ -97,7 +97,7 @@
               <a class="nav-link fw-medium" href="#artikel">Artikel</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link fw-medium" href="#bibliotheraphysessions">Bibliotheraphy Sessions</a>
+              <a class="nav-link fw-medium" href="#bibliotheraphysessions">Bibliother</a>
             </li>
           </ul>
         </div>
@@ -132,7 +132,7 @@
 
           <!-- navbar button: Start -->
           <li>
-            <a href="../vertical-menu-template/auth-login-cover.html" class="btn btn-primary" target="_blank"><span class="tf-icons ti ti-login scaleX-n1-rtl me-md-1"></span><span class="d-none d-md-block">Login/Register</span></a>
+            <a href="<?= base_url('auth') ?>" class="btn btn-primary" target="_blank"><span class="tf-icons ti ti-login scaleX-n1-rtl me-md-1"></span><span class="d-none d-md-block">Login/Register</span></a>
           </li>
           <!-- navbar button: End -->
         </ul>
@@ -306,156 +306,27 @@
             <div class="swiper-reviews-carousel overflow-hidden mb-5 pb-md-2 pb-md-3">
               <div class="swiper" id="swiper-reviews">
                 <div class="swiper-wrapper">
-                  <div class="swiper-slide">
-                    <div class="card h-100">
-                      <div class="card-body text-body d-flex flex-column justify-content-between h-100">
-                        <div class="mb-3">
-                          <img src="<?= base_url('assets/') ?>ebook/book1.jpg" alt="ebook" class="img-fluid" />
-                        </div>
-                        <div class="d-flex align-items-center">
-                          <div>
-                            <h6 class="mb-0">The Ink Black Heart</h6>
-                            <p class="small text-muted mb-0">Robert Galbraith</p>
+                  <?php
+                  foreach ($book as $key => $value) {
+                  ?>
+                    <div class="swiper-slide">
+                      <div class="card h-100">
+                        <div class="card-body text-body d-flex flex-column justify-content-between h-100">
+                          <div class="mb-3">
+                            <img src="<?= base_url('assets/ebook/' . $value['cover']) ?>" alt="ebook" class="img-fluid" />
+                          </div>
+                          <div class="d-flex align-items-center">
+                            <div>
+                              <h6 class="mb-0"><?= $value['judul_buku'] ?></h6>
+                              <p class="small text-muted mb-0"><?= $value['penulis'] ?></p>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <div class="swiper-slide">
-                    <div class="card h-100">
-                      <div class="card-body text-body d-flex flex-column justify-content-between h-100">
-                        <div class="mb-3">
-                          <img src="<?= base_url('assets/') ?>ebook/book2.jpg" alt="ebook" class="img-fluid" />
-                        </div>
-                        <div class="d-flex align-items-center">
-                          <div>
-                            <h6 class="mb-0">The Ink Black Heart</h6>
-                            <p class="small text-muted mb-0">Robert Galbraith</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="swiper-slide">
-                    <div class="card h-100">
-                      <div class="card-body text-body d-flex flex-column justify-content-between h-100">
-                        <div class="mb-3">
-                          <img src="<?= base_url('assets/') ?>ebook/book3.jpg" alt="ebook" class="img-fluid" />
-                        </div>
-                        <div class="d-flex align-items-center">
-                          <div>
-                            <h6 class="mb-0">The Ink Black Heart</h6>
-                            <p class="small text-muted mb-0">Robert Galbraith</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="swiper-slide">
-                    <div class="card h-100">
-                      <div class="card-body text-body d-flex flex-column justify-content-between h-100">
-                        <div class="mb-3">
-                          <img src="<?= base_url('assets/') ?>ebook/book4.jpg" alt="ebook" class="img-fluid" />
-                        </div>
-                        <div class="d-flex align-items-center">
-                          <div>
-                            <h6 class="mb-0">The Ink Black Heart</h6>
-                            <p class="small text-muted mb-0">Robert Galbraith</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="swiper-slide">
-                    <div class="card h-100">
-                      <div class="card-body text-body d-flex flex-column justify-content-between h-100">
-                        <div class="mb-3">
-                          <img src="<?= base_url('assets/') ?>ebook/book5.jpg" alt="ebook" class="img-fluid" />
-                        </div>
-                        <div class="d-flex align-items-center">
-                          <div>
-                            <h6 class="mb-0">The Ink Black Heart</h6>
-                            <p class="small text-muted mb-0">Robert Galbraith</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="swiper-slide">
-                    <div class="card h-100">
-                      <div class="card-body text-body d-flex flex-column justify-content-between h-100">
-                        <div class="mb-3">
-                          <img src="<?= base_url('assets/') ?>ebook/book6.jpg" alt="ebook" class="img-fluid" />
-                        </div>
-                        <div class="d-flex align-items-center">
-                          <div>
-                            <h6 class="mb-0">The Ink Black Heart</h6>
-                            <p class="small text-muted mb-0">Robert Galbraith</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="swiper-slide">
-                    <div class="card h-100">
-                      <div class="card-body text-body d-flex flex-column justify-content-between h-100">
-                        <div class="mb-3">
-                          <img src="<?= base_url('assets/') ?>ebook/book7.jpg" alt="ebook" class="img-fluid" />
-                        </div>
-                        <div class="d-flex align-items-center">
-                          <div>
-                            <h6 class="mb-0">The Ink Black Heart</h6>
-                            <p class="small text-muted mb-0">Robert Galbraith</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="swiper-slide">
-                    <div class="card h-100">
-                      <div class="card-body text-body d-flex flex-column justify-content-between h-100">
-                        <div class="mb-3">
-                          <img src="<?= base_url('assets/') ?>ebook/book8.jpg" alt="ebook" class="img-fluid" />
-                        </div>
-                        <div class="d-flex align-items-center">
-                          <div>
-                            <h6 class="mb-0">The Ink Black Heart</h6>
-                            <p class="small text-muted mb-0">Robert Galbraith</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="swiper-slide">
-                    <div class="card h-100">
-                      <div class="card-body text-body d-flex flex-column justify-content-between h-100">
-                        <div class="mb-3">
-                          <img src="<?= base_url('assets/') ?>ebook/book9.jpg" alt="ebook" class="img-fluid" />
-                        </div>
-                        <div class="d-flex align-items-center">
-                          <div>
-                            <h6 class="mb-0">The Ink Black Heart</h6>
-                            <p class="small text-muted mb-0">Robert Galbraith</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="swiper-slide">
-                    <div class="card h-100">
-                      <div class="card-body text-body d-flex flex-column justify-content-between h-100">
-                        <div class="mb-3">
-                          <img src="<?= base_url('assets/') ?>ebook/book10.jpg" alt="ebook" class="img-fluid" />
-                        </div>
-                        <div class="d-flex align-items-center">
-                          <div>
-                            <h6 class="mb-0">The Ink Black Heart</h6>
-                            <p class="small text-muted mb-0">Robert Galbraith</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  <?php
+                  }
+                  ?>
                 </div>
                 <div class="swiper-button-next"></div>
                 <div class="swiper-button-prev"></div>
@@ -476,83 +347,23 @@
         <h3 class="text-center mb-1"><span class="section-title">Didukung</span> Oleh Therapist Ahli</h3>
         <p class="text-center mb-md-5 pb-3">Tim Therapist ahli dan berpengalaman akan membantu dalam sesi konseling</p>
         <div class="row gy-5 mt-2">
-          <div class="col-lg-3 col-sm-6">
-            <div class="card mt-3 mt-lg-0 shadow-none">
-              <div class="bg-label-primary position-relative team-image-box">
-                <img src="<?= base_url('assets/') ?>assets/img/front-pages/landing-page/team-member-1.png" class="position-absolute card-img-position bottom-0 start-50 scaleX-n1-rtl" alt="human image" />
-              </div>
-              <div class="card-body border border-top-0 border-label-primary text-center">
-                <h5 class="card-title mb-0">Dr. Khairul Bariyyah M.Pd, Kons</h5>
-                <p class="text-muted mb-0">Konselor</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-sm-6">
-            <div class="card mt-3 mt-lg-0 shadow-none">
-              <div class="bg-label-info position-relative team-image-box">
-                <img src="<?= base_url('assets/') ?>assets/img/front-pages/landing-page/team-member-2.png" class="position-absolute card-img-position bottom-0 start-50 scaleX-n1-rtl" alt="human image" />
-              </div>
-              <div class="card-body border border-top-0 border-label-info text-center">
-                <h5 class="card-title mb-0">Paul Miles</h5>
-                <p class="text-muted mb-0">UI Designer</p>
+          <?php
+          foreach ($konselor as $row => $val) {
+          ?>
+            <div class="col-lg-3 col-sm-6">
+              <div class="card mt-3 mt-lg-0 shadow-none">
+                <div class="bg-label-primary position-relative team-image-box">
+                  <img src="<?= base_url('assets/assets/img/front-pages/landing-page/' . $val['gambar']) ?>" class="position-absolute card-img-position bottom-0 start-50 scaleX-n1-rtl" alt="konselor" />
+                </div>
+                <div class="card-body border border-top-0 border-label-primary text-center">
+                  <h5 class="card-title mb-0"><?= $val['nama'] ?></h5>
+                  <p class="text-muted mb-0"><?= $val['profesi'] ?></p>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="col-lg-3 col-sm-6">
-            <div class="card mt-3 mt-lg-0 shadow-none">
-              <div class="bg-label-danger position-relative team-image-box">
-                <img src="<?= base_url('assets/') ?>assets/img/front-pages/landing-page/team-member-3.png" class="position-absolute card-img-position bottom-0 start-50 scaleX-n1-rtl" alt="human image" />
-              </div>
-              <div class="card-body border border-top-0 border-label-danger text-center">
-                <h5 class="card-title mb-0">Nannie Ford</h5>
-                <p class="text-muted mb-0">Development Lead</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-sm-6">
-            <div class="card mt-3 mt-lg-0 shadow-none">
-              <div class="bg-label-success position-relative team-image-box">
-                <img src="<?= base_url('assets/') ?>assets/img/front-pages/landing-page/team-member-4.png" class="position-absolute card-img-position bottom-0 start-50 scaleX-n1-rtl" alt="human image" />
-              </div>
-              <div class="card-body border border-top-0 border-label-success text-center">
-                <h5 class="card-title mb-0">Chris Watkins</h5>
-                <p class="text-muted mb-0">Marketing Manager</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-sm-6 pt-3">
-            <div class="card mt-3 mt-lg-0 shadow-none">
-              <div class="bg-label-primary position-relative team-image-box">
-                <img src="<?= base_url('assets/') ?>assets/img/front-pages/landing-page/fatmasari_p.png" class="position-absolute card-img-position bottom-0 start-50 scaleX-n1-rtl" alt="human image" />
-              </div>
-              <div class="card-body border border-top-0 border-label-primary text-center">
-                <h5 class="card-title mb-0">Dr. Khairul Bariyyah M.Pd, Kons</h5>
-                <p class="text-muted mb-0">Konselor</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-sm-6 pt-3">
-            <div class="card mt-3 mt-lg-0 shadow-none">
-              <div class="bg-label-info position-relative team-image-box">
-                <img src="<?= base_url('assets/') ?>assets/img/front-pages/landing-page/team-member-2.png" class="position-absolute card-img-position bottom-0 start-50 scaleX-n1-rtl" alt="human image" />
-              </div>
-              <div class="card-body border border-top-0 border-label-info text-center">
-                <h5 class="card-title mb-0">Paul Miles</h5>
-                <p class="text-muted mb-0">UI Designer</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-sm-6 pt-3">
-            <div class="card mt-3 mt-lg-0 shadow-none">
-              <div class="bg-label-danger position-relative team-image-box">
-                <img src="<?= base_url('assets/') ?>assets/img/front-pages/landing-page/team-member-3.png" class="position-absolute card-img-position bottom-0 start-50 scaleX-n1-rtl" alt="human image" />
-              </div>
-              <div class="card-body border border-top-0 border-label-danger text-center">
-                <h5 class="card-title mb-0">Nannie Ford</h5>
-                <p class="text-muted mb-0">Development Lead</p>
-              </div>
-            </div>
-          </div>
+          <?php
+          }
+          ?>
         </div>
       </div>
     </section>
@@ -583,69 +394,35 @@
         </div>
         <h3 class="text-center mb-1"><span class="section-title">Artikel</span> Kesehatan Mental</h3>
         <p class="text-center mb-4 pb-3">
-          Tips & Trik dan story yang dapat membantu Anda untuk kesahatn mental.
+          Tips & Trik dan story yang dapat membantu Anda untuk menjaga kesehatan mental.
         </p>
         <div class="row gy-4 pt-lg-3">
-          <!-- artikel -->
-          <div class="col-xl-4 col-lg-4">
-            <div class="card">
-              <div class="card-header">
-                <div class="text-left">
-                  <img src="<?= base_url('assets/') ?>assets/img/artikel/1.jpg" alt="artikel kesehatan mental" class="mb-4 pb-2 img-fluid" />
-                  <small>Posted : 20-Agustus-2023 15:56:01 WIB</small><br>
-                  <small>Oleh : Admin Sienna</small>
-                  <h5 class="mb-3 mt-2">Menghadapi Stress Mahasiswa</h5>
-                  <p>Hai, teman-teman mahasiswa! Gimana nih kabarnya? Pasti lagi sibuk ngejar cita-cita, kan? Tapi, jangan lupakan juga bahwa hidup mahasiswa nggak selalu tentang pesta dan kebebasan. Ada satu kata yang sering mampir dalam hidup kita: STRES...</p>
-                  <div>
-                    <button class="btn btn-primary">Read More</button>
+          <?php
+          foreach ($artikel as $a => $d) {
+          ?>
+            <!-- artikel -->
+            <div class="col-xl-4 col-lg-4">
+              <div class="card">
+                <div class="card-header">
+                  <div class="text-left">
+                    <img src="<?= base_url('assets/assets/img/artikel/' . $d['cover']) ?>" alt="artikel kesehatan mental" class="mb-4 pb-2 img-fluid" />
+                    <small>Posted : <?= date('d-M-Y H:i:s', strtotime($d['date_created'])) ?></small><br>
+                    <small>Oleh : <?= $d['posting_oleh'] ?></small>
+                    <h5 class="mb-3 mt-2"><?= $d['judul'] ?></h5>
+                    <p><?= $d['uraian'] ?></p>
+                    <div>
+                      <a href="<?= base_url('front/artikel/' . $d['id']) ?>" class="btn btn-primary">Read More</a>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="card-body">
-              </div>
-            </div>
-          </div>
-          <!-- artikel -->
-          <!-- artikel -->
-          <div class="col-xl-4 col-lg-4">
-            <div class="card">
-              <div class="card-header">
-                <div class="text-left">
-                  <img src="<?= base_url('assets/') ?>assets/img/artikel/2.jpg" alt="artikel kesehatan mental" class="mb-4 pb-2 img-fluid" />
-                  <small>Posted : 20-Agustus-2023 15:56:01 WIB</small><br>
-                  <small>Oleh : Admin Sienna</small>
-                  <h5 class="mb-3 mt-2">Jangan Lupakan Diri Sendiri!</h5>
-                  <p>Halo, teman-teman mahasiswa! Kita semua tahu bahwa hidup sebagai mahasiswa bisa jadi keren, penuh petualangan, dan seru. Kehidupan mahasiswa sering kali dianggap sebagai periode yang penuh dengan kegembiraan... </p>
-                  <div>
-                    <button class="btn btn-primary">Read More</button>
-                  </div>
+                <div class="card-body">
                 </div>
               </div>
-              <div class="card-body">
-              </div>
             </div>
-          </div>
-          <!-- artikel -->
-          <!-- artikel -->
-          <div class="col-xl-4 col-lg-4">
-            <div class="card">
-              <div class="card-header">
-                <div class="text-left">
-                  <img src="<?= base_url('assets/') ?>assets/img/artikel/3.jpg" alt="artikel kesehatan mental" class="mb-4 pb-2 img-fluid" />
-                  <small>Posted : 20-Agustus-2023 15:56:01 WIB</small><br>
-                  <small>Oleh : Admin Sienna</small>
-                  <h5 class="mb-3 mt-2">Jaga Jiwamu: Petualangan Bersama Literasi Kesehatan Mental</h5>
-                  <p>Kesehatan mental bukan lagi hal yang tabu untuk dibicarakan, terutama di kalangan anak muda. Hari ini, kita akan menjelajahi dunia literasi kesehatan mental dan mengapa hal ini sangat penting ...</p>
-                  <div>
-                    <button class="btn btn-primary">Read More</button>
-                  </div>
-                </div>
-              </div>
-              <div class="card-body">
-              </div>
-            </div>
-          </div>
-          <!-- artikel -->
+            <!-- artikel -->
+          <?php
+          }
+          ?>
 
 
         </div>

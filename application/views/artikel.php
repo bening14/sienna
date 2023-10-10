@@ -38,6 +38,9 @@
     <link rel="stylesheet" href="<?= base_url('assets/') ?>assets/vendor/libs/select2/select2.css" />
     <link rel="stylesheet" href="<?= base_url('assets/') ?>assets/vendor/libs/@form-validation/umd/styles/index.min.css" />
     <link rel="stylesheet" href="<?= base_url('assets/') ?>assets/vendor/libs/sweetalert2/sweetalert2.css" />
+    <link rel="stylesheet" href="<?= base_url('assets/') ?>assets/vendor/libs/quill/typography.css" />
+    <link rel="stylesheet" href="<?= base_url('assets/') ?>assets/vendor/libs/quill/katex.css" />
+    <link rel="stylesheet" href="<?= base_url('assets/') ?>assets/vendor/libs/quill/editor.css" />
 
     <!-- Page CSS -->
 
@@ -48,6 +51,7 @@
     <script src="<?= base_url('assets/') ?>assets/vendor/js/template-customizer.js"></script>
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="<?= base_url('assets/') ?>assets/js/config.js"></script>
+
 </head>
 
 <body>
@@ -81,18 +85,18 @@
                         <!-- Users List Table -->
                         <div class="card">
                             <div class="card-header border-bottom" style="text-align: right;">
-                                <button class="btn btn-sm btn-danger" onclick="tambaho()"><i class="ti ti-plus"></i> Tambah User</button>
+                                <button class="btn btn-sm btn-danger" onclick="tambaho()"><i class="ti ti-plus"></i> Tambah Artikel</button>
                             </div>
                             <div class="card-datatable table-responsive">
-                                <table id="table-user" class="table">
+                                <table id="table-artikel" class="table">
                                     <thead class="border-top">
                                         <tr>
                                             <th>#</th>
-                                            <th>Nama</th>
-                                            <th>No Handphone</th>
-                                            <th>Email</th>
-                                            <th>Level</th>
-                                            <th>Status</th>
+                                            <th>Judul Artikel</th>
+                                            <th>Cover</th>
+                                            <th>Posting</th>
+                                            <th>Waktu</th>
+                                            <th>Isi Artikel</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
@@ -125,36 +129,32 @@
     <!-- / Layout wrapper -->
 
     <!-- Tambah User Modal -->
-    <div class="modal fade" id="tambahuser" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-simple modal-edit-user modal-dialog-centered">
+    <div class="modal fade" id="tambahartikel" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen">
             <div class="modal-content p-3 p-md-5">
                 <div class="modal-body">
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     <div class="text-center mb-4">
-                        <h3 class="mb-2">Tambah User</h3>
+                        <h3 class="mb-2">Tambah Artikel</h3>
                     </div>
                     <form id="form-data" class="row g-3">
                         <div class="col-12 col-md-12">
-                            <label class="form-label" for="nama">Nama Lengkap</label>
-                            <input type="text" id="nama" name="nama" class="form-control" />
+                            <label class="form-label" for="judul">Judul Artikel</label>
+                            <input type="text" id="judul" name="judul" class="form-control" />
                         </div>
                         <div class="col-12 col-md-12">
-                            <label class="form-label" for="no_hp">No Handphone</label>
-                            <input type="text" id="no_hp" name="no_hp" class="form-control" />
+                            <label class="form-label" for="posting_oleh">Posting Oleh</label>
+                            <input type="text" id="posting_oleh" name="posting_oleh" class="form-control" />
                         </div>
                         <div class="col-12 col-md-12">
-                            <label class="form-label" for="email">Email</label>
-                            <input type="text" id="email" name="email" class="form-control" />
+                            <label for="gambar" class="form-label">Gambar (Ukuran Max 1Mb)</label>
+                            <input class="form-control" type="file" id="file" name="file">
                         </div>
                         <div class="col-12 col-md-12">
-                            <label class="form-label" for="level">Level</label>
-                            <select name="level" id="level" class="form-control">
-                                <option value="admin">Admin</option>
-                            </select>
-                        </div>
-                        <div class="col-12 col-md-12">
-                            <label class="form-label" for="email">Password</label>
-                            <input type="password" id="password" name="password" class="form-control" />
+                            <label class="form-label" for="deskripsi">Isi Artikel</label>
+                            <input type="hidden" name="deskripsi" id="deskripsi">
+                            <div id="editor-1" style="min-height: 160px;">
+                            </div>
                         </div>
 
 
@@ -172,38 +172,62 @@
     <!--/ Tambah User Modal -->
 
     <!-- Tambah User Modal -->
-    <div class="modal fade" id="edituser" tabindex="-1" aria-hidden="true">
+    <div class="modal fade" id="editbuku" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen">
+            <div class="modal-content p-3 p-md-5">
+                <div class="modal-body">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <div class="text-center mb-4">
+                        <h3 class="mb-2">Edit Artikel</h3>
+                    </div>
+                    <form id="form-data-edit" class="row g-3">
+                        <div class="col-12 col-md-12">
+                            <label class="form-label" for="judul_e">Judul Artikel</label>
+                            <input type="text" id="judul_e" name="judul_e" class="form-control" />
+                            <input type="hidden" id="id_e" name="id_e" class="form-control" />
+                        </div>
+                        <div class="col-12 col-md-12">
+                            <label class="form-label" for="posting_oleh_e">Posting Oleh</label>
+                            <input type="text" id="posting_oleh_e" name="posting_oleh_e" class="form-control" />
+                        </div>
+                        <div class="col-12 col-md-12">
+                            <label class="form-label" for="deskripsi_e">Isi Artikel</label>
+                            <input type="hidden" name="deskripsi_e" id="deskripsi_e">
+                            <div id="editor-2" style="min-height: 160px;">
+                            </div>
+                        </div>
+
+
+
+                        <div class="col-12 text-center">
+                            <button type="submit" class="btn btn-primary me-sm-3 me-1">Simpan</button>
+                            <button type="reset" class="btn btn-label-secondary" data-bs-dismiss="modal" aria-label="Close">
+                                Cancel
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/ Tambah User Modal -->
+
+    <!-- Ubah Cover buku Modal -->
+    <div class="modal fade" id="ubahcover" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-simple modal-edit-user modal-dialog-centered">
             <div class="modal-content p-3 p-md-5">
                 <div class="modal-body">
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     <div class="text-center mb-4">
-                        <h3 class="mb-2">Edit User</h3>
+                        <h3 class="mb-2">Ubah Cover Buku</h3>
                     </div>
-                    <form id="form-data-edit" class="row g-3">
+                    <form id="form-data-cover" class="row g-3">
                         <div class="col-12 col-md-12">
-                            <label class="form-label" for="nama">Nama Lengkap</label>
-                            <input type="text" id="nama_e" name="nama_e" class="form-control" />
-                            <input type="hidden" id="id" name="id" class="form-control" />
+                            <label for="file_cover" class="form-label">Gambar (Ukuran Max 1Mb)</label>
+                            <input class="form-control" type="file" id="file_cover" name="file_cover">
+                            <input type="hidden" id="id_artikel" name="id_artikel" class="form-control" />
                         </div>
-                        <div class="col-12 col-md-12">
-                            <label class="form-label" for="no_hp_e">No Handphone</label>
-                            <input type="text" id="no_hp_e" name="no_hp_e" class="form-control" />
-                        </div>
-                        <div class="col-12 col-md-12">
-                            <label class="form-label" for="email_e">Email</label>
-                            <input type="text" id="email_e" name="email_e" class="form-control" />
-                        </div>
-                        <div class="col-12 col-md-12">
-                            <label class="form-label" for="level_e">Level</label>
-                            <select name="level_e" id="level_e" class="form-control">
-                                <option value="admin">Admin</option>
-                            </select>
-                        </div>
-                        <div class="col-12 col-md-12">
-                            <label class="form-label" for="password_e">Password</label>
-                            <input type="password" id="password_e" name="password_e" class="form-control" />
-                        </div>
+
 
 
                         <div class="col-12 text-center">
@@ -217,7 +241,7 @@
             </div>
         </div>
     </div>
-    <!--/ Tambah User Modal -->
+    <!--/ Ubah Cover Modal -->
 
 
 
@@ -246,12 +270,145 @@
     <script src="<?= base_url('assets/') ?>assets/vendor/libs/cleavejs/cleave.js"></script>
     <script src="<?= base_url('assets/') ?>assets/vendor/libs/cleavejs/cleave-phone.js"></script>
     <script src="<?= base_url('assets/') ?>assets/vendor/libs/sweetalert2/sweetalert2.js"></script>
+    <script src="<?= base_url('assets/') ?>assets/vendor/libs/quill/katex.js"></script>
+    <script src="<?= base_url('assets/') ?>assets/vendor/libs/quill/quill.js"></script>
 
     <!-- Main JS -->
     <script src="<?= base_url('assets/') ?>assets/js/main.js"></script>
 
     <!-- Page JS -->
     <script src="<?= base_url('assets/') ?>assets/js/app-user-list.js"></script>
+    <script src="<?= base_url('assets/') ?>assets/js/forms-editors.js"></script>
+
+    <script>
+        var quill = new Quill('#editor-1', {
+            theme: 'snow',
+            modules: {
+                toolbar: [
+                    [{
+                            font: []
+                        },
+                        {
+                            size: []
+                        }
+                    ],
+                    ['bold', 'italic', 'underline', 'strike'],
+                    [{
+                            color: []
+                        },
+                        {
+                            background: []
+                        }
+                    ],
+                    [{
+                            script: 'super'
+                        },
+                        {
+                            script: 'sub'
+                        }
+                    ],
+                    [{
+                            header: '1'
+                        },
+                        {
+                            header: '2'
+                        },
+                        'blockquote',
+                        'code-block'
+                    ],
+                    [{
+                            list: 'ordered'
+                        },
+                        {
+                            list: 'bullet'
+                        },
+                        {
+                            indent: '-1'
+                        },
+                        {
+                            indent: '+1'
+                        }
+                    ],
+                    [
+                        'direction',
+                        {
+                            align: []
+                        }
+                    ],
+                    ['link', 'image', 'video', 'formula'],
+                    ['clean']
+                ]
+            },
+        });
+        quill.on('text-change', function(delta, oldDelta, source) {
+            document.querySelector("input[name='deskripsi']").value = quill.root.innerHTML;
+        });
+    </script>
+
+    <script>
+        var quill2 = new Quill('#editor-2', {
+            theme: 'snow',
+            modules: {
+                toolbar: [
+                    [{
+                            font: []
+                        },
+                        {
+                            size: []
+                        }
+                    ],
+                    ['bold', 'italic', 'underline', 'strike'],
+                    [{
+                            color: []
+                        },
+                        {
+                            background: []
+                        }
+                    ],
+                    [{
+                            script: 'super'
+                        },
+                        {
+                            script: 'sub'
+                        }
+                    ],
+                    [{
+                            header: '1'
+                        },
+                        {
+                            header: '2'
+                        },
+                        'blockquote',
+                        'code-block'
+                    ],
+                    [{
+                            list: 'ordered'
+                        },
+                        {
+                            list: 'bullet'
+                        },
+                        {
+                            indent: '-1'
+                        },
+                        {
+                            indent: '+1'
+                        }
+                    ],
+                    [
+                        'direction',
+                        {
+                            align: []
+                        }
+                    ],
+                    ['link', 'image', 'video', 'formula'],
+                    ['clean']
+                ]
+            },
+        });
+        quill2.on('text-change', function(delta, oldDelta, source) {
+            document.querySelector("input[name='deskripsi_e']").value = quill2.root.innerHTML;
+        });
+    </script>
 </body>
 
 </html>
@@ -259,8 +416,8 @@
 <script>
     <?php $target = 0; ?>
     $(function() {
-        $("#table-user").DataTable({
-            "responsive": true,
+        $("#table-artikel").DataTable({
+            "responsive": false,
             "lengthChange": true,
             "autoWidth": false,
             'serverSide': true,
@@ -270,7 +427,7 @@
             ],
             'ajax': {
                 'dataType': 'json',
-                'url': '<?= base_url() ?>dashboard/ajax_table_user',
+                'url': '<?= base_url() ?>dashboard/ajax_table_artikel',
                 'type': 'post'
             },
             'columns': [{
@@ -280,30 +437,29 @@
                 }, {
                     "target": [<?= $target ?>],
                     "className": 'text-center py-1',
-                    "data": "data.nama"
+                    "data": "data.judul"
                 }, {
                     "target": [<?= $target ?>],
                     "className": 'text-center py-1',
-                    "data": "data.no_hp",
-                }, {
-                    "target": [<?= $target ?>],
-                    "className": 'text-center py-1',
-                    "data": "data.email",
-                }, {
-                    "target": [<?= $target ?>],
-                    "className": 'text-center py-1',
-                    "data": "data.level",
-                }, {
-                    "target": [<?= $target ?>],
-                    "className": 'text-center py-1',
+                    // "data": "data.cover",
                     "data": "data",
                     "render": function(data) {
-                        if (data.is_active == 1) {
-                            return `<span class="badge rounded-pill bg-label-success">Active</span>`
-                        } else {
-                            return `<span class="badge rounded-pill bg-label-danger">Not Active</span>`
-                        }
+                        return `<img src="<?= base_url('assets/artikel/') ?>` + data.cover + `" alt="artikel" class="img-fluid" style="max-width: 80px;margin-bottom: 10px;"><br>
+                                    <button type="button" class="btn btn-sm btn-success waves-effect waves-light" onclick="ubah_cover(` + data.id + `)">Ubah</button>`
                     }
+                }, {
+                    "target": [<?= $target ?>],
+                    "className": 'text-center py-1',
+                    "data": "data.posting_oleh",
+                }, {
+                    "target": [<?= $target ?>],
+                    "className": 'text-center py-1',
+                    "data": "data.date_created",
+                },
+                {
+                    "target": [<?= $target ?>],
+                    "className": 'text-center py-1',
+                    "data": "data.uraian",
                 },
                 {
                     "target": [<?= $target ?>],
@@ -311,7 +467,7 @@
                     "data": "data",
                     "render": function(data) {
                         return `<div class="d-flex align-items-center">
-                                    <a href="javascript:;" class="text-body" onclick="edito('` + data.id + `','` + data.nama + `','` + data.no_hp + `','` + data.email + `')"><i class="ti ti-edit ti-sm me-2"></i></a>
+                                    <a href="javascript:;" class="text-body" onclick="edito('` + data.id + `','` + data.judul + `','` + data.posting_oleh + `','` + data.uraian + `')"><i class="ti ti-edit ti-sm me-2"></i></a>
                                     <a href="javascript:;" class="text-body delete-record" onclick="delete_data('` + data.id + `')"><i class="ti ti-trash ti-sm mx-2"></i></a>
                                     
                                 </div>`
@@ -325,13 +481,13 @@
     });
 
     function reload_table() {
-        $('#table-user').DataTable().ajax.reload(null, false);
+        $('#table-artikel').DataTable().ajax.reload(null, false);
     }
 
     $("#form-data").submit(function(e) {
         e.preventDefault()
 
-        if ($('#nama').val() == '' || $('#no_hp').val() == '' || $('#email').val() == '' || $('#level').val() == '' || $('#password').val() == '') {
+        if ($('#judul').val() == '' || $('#posting_oleh').val() == '' || $('#deskripsi').val() == '') {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
@@ -345,15 +501,17 @@
         }
 
         var form_data = new FormData();
-        form_data.append('table', 'mst_user');
-        form_data.append('nama', $("#nama").val());
-        form_data.append('no_hp', $("#no_hp").val());
-        form_data.append('email', $("#email").val());
-        form_data.append('level', $("#level").val());
-        form_data.append('password_mentah', $("#password").val());
-        form_data.append('kategori', 'tambah');
+        form_data.append('table', 'tbl_artikel');
+        form_data.append('judul', $("#judul").val());
+        form_data.append('posting_oleh', $("#posting_oleh").val());
+        form_data.append('uraian', $("#deskripsi").val());
 
-        var url_ajax = '<?= base_url() ?>dashboard/insert_data_user'
+        if ($('#file').val() !== "") {
+            var file_data = $('#file').prop('files')[0];
+            form_data.append('file', file_data);
+        }
+
+        var url_ajax = '<?= base_url() ?>dashboard/insert_data_artikel'
 
         $.ajax({
             url: url_ajax,
@@ -376,11 +534,9 @@
                         },
                         buttonsStyling: false
                     })
-                    $('#nama').val('')
-                    $('#no_hp').val('')
-                    $('#email').val('')
-                    $('#password').val('')
-                    $('#tambahuser').modal('hide');
+                    $('#judul').val('')
+                    $('#posting_oleh').val('')
+                    $('#tambahartikel').modal('hide');
                     reload_table()
 
                 } else {
@@ -411,7 +567,7 @@
 
 
     function tambaho(id) {
-        $('#tambahuser').modal('show')
+        $('#tambahartikel').modal('show')
     }
 
     function delete_data(id) {
@@ -435,7 +591,7 @@
                         url: '<?= base_url() ?>dashboard/delete_data',
                         data: {
                             id: id,
-                            table: "mst_user"
+                            table: "tbl_artikel"
                         },
                         type: 'post',
                         dataType: 'json',
@@ -467,19 +623,24 @@
         });
     }
 
-    function edito(id, nama, no_hp, email) {
-        $('#edituser').modal('show')
+    function edito(id, judul, posting_oleh, deskripsi) {
+        $('#editbuku').modal('show')
 
-        $('#id').val(id)
-        $('#nama_e').val(nama)
-        $('#no_hp_e').val(no_hp)
-        $('#email_e').val(email)
+        $('#id_e').val(id)
+        $('#judul_e').val(judul)
+        $('#posting_oleh_e').val(posting_oleh)
+        $('#deskripsi_e').val(deskripsi)
+
+        var a = deskripsi
+
+        //taruh data dalam quill dari table
+        quill2.root.innerHTML = a
     }
 
     $("#form-data-edit").submit(function(e) {
         e.preventDefault()
 
-        if ($('#nama_e').val() == '' || $('#no_hp_e').val() == '' || $('#email_e').val() == '' || $('#password_e').val() == '' || $('#level_e').val() == '') {
+        if ($('#judul_e').val() == '' || $('#posting_oleh_e').val() == '' || $('#deskripsi_e').val() == '') {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
@@ -493,16 +654,13 @@
         }
 
         var form_data = new FormData();
-        form_data.append('table', 'mst_user');
-        form_data.append('id', $("#id").val());
-        form_data.append('nama', $("#nama_e").val());
-        form_data.append('no_hp', $("#no_hp_e").val());
-        form_data.append('email', $("#email_e").val());
-        form_data.append('password_mentah', $("#password_e").val());
-        form_data.append('level', $("#level_e").val());
-        form_data.append('kategori', 'edit');
+        form_data.append('table', 'tbl_artikel');
+        form_data.append('id', $("#id_e").val());
+        form_data.append('judul', $("#judul_e").val());
+        form_data.append('posting_oleh', $("#posting_oleh_e").val());
+        form_data.append('uraian', $("#deskripsi_e").val());
 
-        var url_ajax = '<?= base_url() ?>dashboard/insert_data_user'
+        var url_ajax = '<?= base_url() ?>dashboard/edit_data_buku'
 
         $.ajax({
             url: url_ajax,
@@ -525,7 +683,7 @@
                         },
                         buttonsStyling: false
                     })
-                    $('#edituser').modal('hide');
+                    $('#editbuku').modal('hide');
                     reload_table()
 
                 } else {
@@ -553,4 +711,73 @@
             }
         })
     })
+
+    $("#form-data-cover").submit(function(e) {
+        e.preventDefault()
+
+        var form_data = new FormData();
+        form_data.append('table', 'tbl_artikel');
+        form_data.append('id', $("#id_artikel").val());
+
+        if ($('#file_cover').val() !== "") {
+            var file_data = $('#file_cover').prop('files')[0];
+            form_data.append('file', file_data);
+        }
+
+        var url_ajax = '<?= base_url() ?>dashboard/ubah_cover_artikel'
+
+        $.ajax({
+            url: url_ajax,
+            type: "post",
+            cache: false,
+            contentType: false,
+            processData: false,
+            data: form_data,
+            dataType: "json",
+            success: function(result) {
+                if (result.status == "success") {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'berhasil ubah cover buku',
+                        showConfirmButton: false,
+                        timer: 1500,
+                        customClass: {
+                            confirmButton: 'btn btn-primary'
+                        },
+                        buttonsStyling: false
+                    })
+                    $('#ubahcover').modal('hide');
+                    reload_table()
+
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Gagal tambah data',
+                        customClass: {
+                            confirmButton: 'btn btn-primary'
+                        },
+                        buttonsStyling: false
+                    })
+                }
+            },
+            error: function(err) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Telah terjadi kesalahan, silahkan contact CS',
+                    customClass: {
+                        confirmButton: 'btn btn-primary'
+                    },
+                    buttonsStyling: false
+                })
+            }
+        })
+    })
+
+    function ubah_cover(id) {
+        $('#ubahcover').modal('show')
+        $('#id_artikel').val(id)
+    }
 </script>

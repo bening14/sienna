@@ -29,19 +29,19 @@
         </li>
         <!-- Dashboards -->
         <li class="menu-item">
-            <a href="#" class="menu-link">
+            <a href="<?= base_url('dashboard/ebook') ?>" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-book"></i>
                 <div data-i18n="E-Book">E-Book</div>
             </a>
         </li>
         <li class="menu-item">
-            <a href="#" class="menu-link">
+            <a href="<?= base_url('dashboard/konselor') ?>" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-users"></i>
                 <div data-i18n="Konselor">Konselor</div>
             </a>
         </li>
         <li class="menu-item">
-            <a href="#" class="menu-link">
+            <a href="<?= base_url('dashboard/artikel') ?>" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-news"></i>
                 <div data-i18n="Artikel">Artikel</div>
             </a>

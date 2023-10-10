@@ -2,6 +2,14 @@
 
 class Crud extends CI_Model
 {
+    public function get_where_like($table, $column, $like)
+    {
+        $this->db->like($column, $like);
+        $this->db->limit(12);
+        $this->db->order_by("id", "DESC");
+        return $this->db->get($table);
+    }
+
     public function get_where($table, $where)
     {
         $this->db->order_by("id", "DESC");
@@ -39,7 +47,14 @@ class Crud extends CI_Model
     public function get_all_limit($table)
     {
         $this->db->order_by("id", "DESC");
-        $this->db->limit(1);
+        $this->db->limit(6);
+        return $this->db->get($table);
+    }
+
+    public function get_all_limit_12($table)
+    {
+        $this->db->order_by("id", "DESC");
+        $this->db->limit(12);
         return $this->db->get($table);
     }
 

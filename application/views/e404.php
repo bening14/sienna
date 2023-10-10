@@ -54,7 +54,7 @@
         <div class="misc-wrapper">
             <h2 class="mb-1 mt-4">Halaman tidak ditemukan !</h2>
             <p class="mb-4 mx-2">Oops! 😖 Halaman yang Anda cari tidak ditemukan disini.</p>
-            <a href="<?= base_url('auth') ?>" class="btn btn-primary mb-4">Kembali</a>
+            <a href="<?= base_url('') ?>" class="btn btn-primary mb-4">Kembali</a>
             <div class="mt-4">
                 <img src="<?= base_url('assets/') ?>assets/img/illustrations/page-misc-error.png" alt="page-misc-error" width="225" class="img-fluid" />
             </div>
