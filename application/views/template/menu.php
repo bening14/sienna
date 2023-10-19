@@ -46,6 +46,12 @@
                 <div data-i18n="Artikel">Artikel</div>
             </a>
         </li>
+        <li class="menu-item">
+            <a href="<?= base_url('dashboard/bibliotherapy') ?>" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-brand-hipchat"></i>
+                <div data-i18n="Bibliotherapy">Bibliotherapy</div>
+            </a>
+        </li>
         <!-- Menu -->
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">Setting</span>

@@ -24,6 +24,11 @@ class Dashboard extends CI_Controller
         $this->load->view('dashboard/user');
     }
 
+    public function bibliotherapy()
+    {
+        $this->load->view('bibliotherapy');
+    }
+
     public function ajax_table_user()
     {
         $table = 'mst_user'; //nama tabel dari database
@@ -137,6 +142,41 @@ class Dashboard extends CI_Controller
             $row['data']['penulis'] = $key->penulis;
             $row['data']['cover'] = $key->cover;
             $row['data']['deskripsi'] = $key->deskripsi;
+            $row['data']['date_created'] = date('d-M-Y', strtotime($key->date_created));
+
+            $data[] = $row;
+        }
+
+        $output = array(
+            "draw" => $_POST['draw'],
+            "recordsTotal" => $this->crud->count_all($table),
+            "recordsFiltered" => $this->crud->count_filtered($table, $select, $column_order, $column_search, $order),
+            "data" => $data,
+            "query" => $this->db->last_query()
+        );
+        //output to json format
+        echo json_encode($output);
+    }
+
+    public function ajax_table_therapy()
+    {
+        $table = 'tbl_sesi_bibliotherapy'; //nama tabel dari database
+        $column_order = array('id', 'judul_sesi', 'waktu', 'tempat', 'cover', 'date_created'); //field yang ada di table user
+        $column_search = array('id', 'judul_sesi', 'waktu', 'tempat', 'cover', 'date_created'); //field yang diizin untuk pencarian 
+        $select = 'id, judul_sesi, waktu, tempat, cover, date_created';
+        $order = array('id' => 'asc'); // default order 
+        $list = $this->crud->get_datatables($table, $select, $column_order, $column_search, $order);
+        $data = array();
+        $no = $_POST['start'];
+        foreach ($list as $key) {
+            $no++;
+            $row = array();
+            $row['data']['no'] = $no;
+            $row['data']['id'] = $key->id;
+            $row['data']['judul_sesi'] = $key->judul_sesi;
+            $row['data']['waktu'] = $key->waktu;
+            $row['data']['tempat'] = $key->tempat;
+            $row['data']['cover'] = $key->cover;
             $row['data']['date_created'] = date('d-M-Y', strtotime($key->date_created));
 
             $data[] = $row;
