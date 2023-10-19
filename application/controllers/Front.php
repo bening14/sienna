@@ -15,6 +15,15 @@ class Front extends CI_Controller
 		$this->load->view('front', $data);
 	}
 
+	public function book()
+	{
+		$this->load->model("Crud", "crud");
+
+		$data['book'] = $this->crud->get_all('tbl_book')->result_array();
+
+		$this->load->view('listbook', $data);
+	}
+
 	public function artikel()
 	{
 		$this->load->model("Crud", "crud");

@@ -125,34 +125,11 @@
         <!-- Menu wrapper: End -->
         <!-- Toolbar: Start -->
         <ul class="navbar-nav flex-row align-items-center ms-auto">
-          <!-- Style Switcher -->
-          <li class="nav-item dropdown-style-switcher dropdown me-2 me-xl-0">
-            <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
-              <i class="ti ti-sm"></i>
-            </a>
-            <ul class="dropdown-menu dropdown-menu-end dropdown-styles">
-              <li>
-                <a class="dropdown-item" href="javascript:void(0);" data-theme="light">
-                  <span class="align-middle"><i class="ti ti-sun me-2"></i>Light</span>
-                </a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="javascript:void(0);" data-theme="dark">
-                  <span class="align-middle"><i class="ti ti-moon me-2"></i>Dark</span>
-                </a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="javascript:void(0);" data-theme="system">
-                  <span class="align-middle"><i class="ti ti-device-desktop me-2"></i>System</span>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <!-- / Style Switcher-->
+
 
           <!-- navbar button: Start -->
           <li>
-            <a href="<?= base_url('auth') ?>" class="btn btn-primary" target="_blank"><span class="tf-icons ti ti-login scaleX-n1-rtl me-md-1"></span><span class="d-none d-md-block">Login/Register</span></a>
+            <a href="<?= base_url('auth') ?>" class="btn btn-primary" target="_blank"><span class="tf-icons ti ti-login scaleX-n1-rtl me-md-1"></span><span class="d-none d-md-block">Login</span></a>
           </li>
           <!-- navbar button: End -->
         </ul>
@@ -165,35 +142,7 @@
   <!-- Sections:Start -->
 
   <div data-bs-spy="scroll" class="scrollspy-example">
-    <!-- Hero: Start -->
-    <!-- <section id="hero-animation">
-      <div id="landingHero" class="section-py landing-hero position-relative">
-        <div class="container">
-          <div class="hero-text-box text-center">
-            <h1 class="text-primary hero-title display-6 fw-bold">SIENNA</h1>
-            <h2 class="hero-sub-title h6 mb-4 pb-1">
-              Model Aplikasi E-Bibliotherapy System Berbasis Web<br class="d-none d-lg-block" />
-              Sebagai Media Literasi Kesehatan Mental Mahasiswa.
-            </h2>
-            <div class="landing-hero-btn d-inline-block position-relative">
-              <span class="hero-btn-item position-absolute d-none d-md-flex text-heading">Join community
-                <img src="<?= base_url('assets/') ?>assets/img/front-pages/icons/Join-community-arrow.png" alt="Join community arrow" class="scaleX-n1-rtl" /></span>
-              <a href="#landingPricing" class="btn btn-primary btn-lg">Get early access</a>
-            </div>
-          </div>
-          <div id="heroDashboardAnimation" class="hero-animation-img">
-            <a href="../vertical-menu-template/app-ecommerce-dashboard.html" target="_blank">
-              <div id="heroAnimationImg" class="position-relative hero-dashboard-img">
-                <img src="<?= base_url('assets/') ?>assets/img/front-pages/landing-page/hero-dashboard-light.png" alt="hero dashboard" class="animation-img" data-app-light-img="front-pages/landing-page/hero-dashboard-light.png" data-app-dark-img="front-pages/landing-page/hero-dashboard-dark.png" />
-                <img src="<?= base_url('assets/') ?>assets/img/front-pages/landing-page/hero-elements-light.png" alt="hero elements" class="position-absolute hero-elements-img animation-img top-0 start-0" data-app-light-img="front-pages/landing-page/hero-elements-light.png" data-app-dark-img="front-pages/landing-page/hero-elements-dark.png" />
-              </div>
-            </a>
-          </div>
-        </div>
-      </div>
-      <div class="landing-hero-blank"></div>
-    </section> -->
-    <!-- Hero: End -->
+
 
     <section id="hero-animation">
       <!-- <div id="landingHero" class="section-py landing-hero position-relative"> -->
@@ -348,6 +297,9 @@
                 <i class="ti ti-chevron-right ti-sm"></i>
               </button>
             </div>
+            <div>
+              <a href="<?= base_url('front/book') ?>" class="btn btn-primary mt-5">Lihat semua</a>
+            </div>
           </div>
           <div class="col-md-6 col-lg-7 col-xl-9">
             <div class="swiper-reviews-carousel overflow-hidden mb-5 pb-md-2 pb-md-3">
@@ -360,7 +312,7 @@
                       <div class="card h-100">
                         <div class="card-body text-body d-flex flex-column justify-content-between h-100">
                           <div class="mb-3">
-                            <img src="<?= base_url('assets/ebook/' . $value['cover']) ?>" alt="ebook" class="img-fluid" />
+                            <a href="<?= base_url('front/bukudetil/' . $value['id']) ?>"><img src="<?= base_url('assets/ebook/' . $value['cover']) ?>" alt="ebook" class="img-fluid" /></a>
                           </div>
                           <div class="d-flex align-items-center">
                             <div>
@@ -481,51 +433,32 @@
     <section id="bibliotheraphysessions" class="section-py bg-body landing-contact">
       <div class="container">
         <div class="text-center mb-3 pb-1">
-          <span class="badge bg-label-primary">Contact US</span>
+          <span class="badge bg-label-primary">Sesi Bibliotheraphy</span>
         </div>
-        <h3 class="text-center mb-1"><span class="section-title">Let's work</span> together</h3>
-        <p class="text-center mb-4 mb-lg-5 pb-md-3">Any question or remark? just write us a message</p>
+        <h3 class="text-center mb-1"><span class="section-title">Bibliotheraphy</span> Sessions</h3>
+        <p class="text-center mb-4 mb-lg-5 pb-md-3">Jadwal Sesi Bibliotheraphy Individual maupun Kelompok</p>
         <div class="row gy-4">
           <div class="col-lg-5">
             <div class="contact-img-box position-relative border p-2 h-100">
-              <img src="<?= base_url('assets/') ?>assets/img/front-pages/landing-page/contact-customer-service.png" alt="contact customer service" class="contact-img w-100 scaleX-n1-rtl" />
-              <div class="pt-3 px-4 pb-1">
-                <div class="row gy-3 gx-md-4">
-                  <div class="col-md-6 col-lg-12 col-xl-6">
-                    <div class="d-flex align-items-center">
-                      <div class="badge bg-label-primary rounded p-2 me-2"><i class="ti ti-mail ti-sm"></i></div>
-                      <div>
-                        <p class="mb-0">Email</p>
-                        <h5 class="mb-0">
-                          <a href="mailto:example@gmail.com" class="text-heading">example@gmail.com</a>
-                        </h5>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-6 col-lg-12 col-xl-6">
-                    <div class="d-flex align-items-center">
-                      <div class="badge bg-label-success rounded p-2 me-2">
-                        <i class="ti ti-phone-call ti-sm"></i>
-                      </div>
-                      <div>
-                        <p class="mb-0">Phone</p>
-                        <h5 class="mb-0"><a href="tel:+1234-568-963" class="text-heading">+1234 568 963</a></h5>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <img src="<?= base_url('assets/ebook/book6.jpg') ?>" alt="Bibliotheraphy" class="contact-img w-100 scaleX-n1-rtl" />
+
             </div>
           </div>
           <div class="col-lg-7">
             <div class="card">
               <div class="card-body">
-                <h4 class="mb-1">Send a message</h4>
-                <p class="mb-4">
-                  If you would like to discuss anything related to payment, account, licensing,<br class="d-none d-lg-block" />
-                  partnerships, or have pre-sales questions, you’re at the right place.
+                <h4 class="mb-1">Atomic Habits</h4>
+                <p class="mb-4 mt-5 lh-lg">
+                <div class="mb-2">Kamis, 10 September 2023</div>
+                <div class="mb-2">Waktu : 15:00 WIB</div>
+                <div class="mb-2">Ruang PBK3 UM Gedung B17 Lantai 1</div>
+                <div class="mb-2">
+                  <button type="button" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#basicModal">
+                    Daftar
+                  </button>
+                </div>
                 </p>
-                <form>
+                <!-- <form>
                   <div class="row g-3">
                     <div class="col-md-6">
                       <label class="form-label" for="contact-form-fullname">Full Name</label>
@@ -543,7 +476,7 @@
                       <button type="submit" class="btn btn-primary">Send inquiry</button>
                     </div>
                   </div>
-                </form>
+                </form> -->
               </div>
             </div>
           </div>
@@ -573,9 +506,9 @@
               <span class="app-brand-text demo footer-link fw-bold ms-2 ps-1">Sienna</span>
             </a>
             <p class="footer-text footer-logo-description mb-4">
-              Most developer friendly & highly customisable Admin Dashboard Template.
+              Model aplikasi E-bibliotheraphy system berbasis web, sebagai media literasi kesehatan mental mahasiswa
             </p>
-            <form class="footer-form">
+            <!-- <form class="footer-form">
               <label for="footer-email" class="small">Subscribe to newsletter</label>
               <div class="d-flex mt-1">
                 <input type="email" class="form-control rounded-0 rounded-start-bottom rounded-start-top" id="footer-email" placeholder="Your email" />
@@ -583,53 +516,35 @@
                   Subscribe
                 </button>
               </div>
-            </form>
+            </form> -->
           </div>
           <div class="col-lg-2 col-md-4 col-sm-6">
-            <h6 class="footer-title mb-4">Demos</h6>
+            <h6 class="footer-title mb-4">Halaman</h6>
             <ul class="list-unstyled">
               <li class="mb-3">
-                <a href="../vertical-menu-template/" target="_blank" class="footer-link">Vertical Layout</a>
+                <a href="<?= base_url() ?>" class="footer-link">Home</a>
               </li>
               <li class="mb-3">
-                <a href="../horizontal-menu-template/" target="_blank" class="footer-link">Horizontal Layout</a>
+                <a href="<?= base_url('front/#ebook') ?>" class="footer-link">E-Book</a>
               </li>
               <li class="mb-3">
-                <a href="../vertical-menu-template-bordered/" target="_blank" class="footer-link">Bordered Layout</a>
+                <a href="<?= base_url('front/#bibliotherapist') ?>" class="footer-link">Threapist</a>
               </li>
               <li class="mb-3">
-                <a href="../vertical-menu-template-semi-dark/" target="_blank" class="footer-link">Semi Dark Layout</a>
+                <a href="<?= base_url('front/#selftasessment') ?>" class="footer-link">Self Asessment</a>
               </li>
               <li class="mb-3">
-                <a href="../vertical-menu-template-dark/" target="_blank" class="footer-link">Dark Layout</a>
+                <a href="<?= base_url('front/#artikel') ?>" class="footer-link">Artikel</a>
               </li>
             </ul>
           </div>
-          <div class="col-lg-2 col-md-4 col-sm-6">
-            <h6 class="footer-title mb-4">Pages</h6>
-            <ul class="list-unstyled">
-              <li class="mb-3">
-                <a href="pricing-page.html" class="footer-link">Pricing</a>
-              </li>
-              <li class="mb-3">
-                <a href="payment-page.html" class="footer-link">Payment<span class="badge rounded bg-primary ms-2">New</span></a>
-              </li>
-              <li class="mb-3">
-                <a href="checkout-page.html" class="footer-link">Checkout</a>
-              </li>
-              <li class="mb-3">
-                <a href="help-center-landing.html" class="footer-link">Help Center</a>
-              </li>
-              <li class="mb-3">
-                <a href="../vertical-menu-template/auth-login-cover.html" target="_blank" class="footer-link">Login/Register</a>
-              </li>
-            </ul>
+          <div class="col-lg-5 col-md-8 col-sm-6">
+            <h6 class="footer-title mb-4">Hubungi Kami</h6>
+            <h6 class="text-white">FIP Universitas Negeri Malang</h6>
+            <div class="text-white">Jl. Semarang 5 Malang, 65145<br><br>CP. Khairul Bariyyah<br>
+              +62 819 3798 1282</div>
           </div>
-          <div class="col-lg-3 col-md-4">
-            <h6 class="footer-title mb-4">Download our app</h6>
-            <a href="javascript:void(0);" class="d-block footer-link mb-3 pb-2"><img src="<?= base_url('assets/') ?>assets/img/front-pages/landing-page/apple-icon.png" alt="apple icon" /></a>
-            <a href="javascript:void(0);" class="d-block footer-link"><img src="<?= base_url('assets/') ?>assets/img/front-pages/landing-page/google-play-icon.png" alt="google play icon" /></a>
-          </div>
+
         </div>
       </div>
     </div>
@@ -644,7 +559,7 @@
           <a href="https://pixinvent.com" target="_blank" class="fw-medium text-white footer-link">Khairul Bariyyah,</a>
           <span class="footer-text"> Made with ❤️.</span>
         </div>
-        <div>
+        <!-- <div>
           <a href="https://github.com/sienna" class="footer-link me-3" target="_blank">
             <img src="<?= base_url('assets/') ?>assets/img/front-pages/icons/github-light.png" alt="github icon" data-app-light-img="front-pages/icons/github-light.png" data-app-dark-img="front-pages/icons/github-dark.png" />
           </a>
@@ -657,11 +572,101 @@
           <a href="https://www.instagram.com/sienna/" class="footer-link" target="_blank">
             <img src="<?= base_url('assets/') ?>assets/img/front-pages/icons/instagram-light.png" alt="google icon" data-app-light-img="front-pages/icons/instagram-light.png" data-app-dark-img="front-pages/icons/instagram-dark.png" />
           </a>
-        </div>
+        </div> -->
       </div>
     </div>
   </footer>
   <!-- Footer: End -->
+
+  <!-- Modal daftar -->
+  <div class="modal fade" id="basicModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel1">Sesi Bibliotherapy</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row text-center mt-3">
+            <p>Silahkan isi biodata Anda untuk melakukan pendaftaran Sesi Bibliotherapy</p>
+          </div>
+          <div class="row g-2">
+            <div class="col mb-3">
+              <label for="nameBasic" class="form-label">Nama</label>
+              <input type="text" id="nameBasic" class="form-control" placeholder="Contoh : Budi Setya Nugraha">
+            </div>
+          </div>
+          <div class="row g-2">
+            <div class="col mb-0">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" id="email" class="form-control" placeholder="budi.setya@gmail.com">
+            </div>
+          </div>
+          <div class="row g-2">
+            <div class="col mb-0">
+              <label for="handphone" class="form-label">Nomor Handphone</label>
+              <input type="text" id="handphone" class="form-control" placeholder="Contoh : 08190909090">
+            </div>
+          </div>
+          <div class="row g-2">
+            <div class="col mb-0">
+              <label for="fakultas" class="form-label">Fakultas</label>
+              <input type="text" id="fakultas" class="form-control" placeholder="Contoh : Ilmu Pendidikan">
+            </div>
+          </div>
+          <div class="row g-2">
+            <div class="col mb-0">
+              <label for="jurusan" class="form-label">Jurusan</label>
+              <input type="text" id="jurusan" class="form-control" placeholder="Contoh : Bimbingan dan Konseling">
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-label-secondary waves-effect" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary waves-effect waves-light">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end modal daftar -->
+
+  <!-- Tambah User Modal -->
+  <div class="modal fade" id="daftarsesi" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-simple modal-edit-user modal-dialog-centered">
+      <div class="modal-content p-3 p-md-5">
+        <div class="modal-body">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <div class="text-center mb-4">
+            <h3 class="mb-2">Sesi Bibliotherapy</h3>
+
+          </div>
+          <form id="form-data" class="row g-3">
+            <div class="col-12 col-md-12">
+              <label class="form-label" for="nama">Nama Lengkap</label>
+              <input type="text" id="nama" name="nama" class="form-control" />
+            </div>
+            <div class="col-12 col-md-12">
+              <label class="form-label" for="no_hp">No Handphone</label>
+              <input type="text" id="no_hp" name="no_hp" class="form-control" />
+            </div>
+            <div class="col-12 col-md-12">
+              <label class="form-label" for="email">Email</label>
+              <input type="text" id="email" name="email" class="form-control" />
+            </div>
+
+
+            <div class="col-12 text-center">
+              <button type="submit" class="btn btn-primary me-sm-3 me-1">Daftar</button>
+              <button type="reset" class="btn btn-label-secondary" data-bs-dismiss="modal" aria-label="Close">
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--/ Tambah User Modal -->
 
   <!-- Core JS -->
   <!-- build:js assets/vendor/js/core.js -->
