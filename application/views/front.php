@@ -182,7 +182,8 @@
         <div class="row gy-5">
           <div class="col-lg-5">
             <div class="text-center">
-              <img src="<?= base_url('assets/') ?>assets/img/illustrations/auth-register-multisteps-illustration.png" alt="what is sienna" class="" style="max-width: 220px;" />
+              <img src="<?= base_url('assets/') ?>assets/img/front-pages/landing-page/1.png" alt="sienna" class="img-fluid" />
+              <!-- <img src="<?= base_url('assets/') ?>assets/img/illustrations/auth-register-multisteps-illustration.png" alt="what is sienna" class="" style="max-width: 220px;" /> -->
             </div>
           </div>
           <div class="col-lg-7">
@@ -352,7 +353,7 @@
             <div class="col-lg-3 col-sm-6">
               <div class="card mt-3 mt-lg-0 shadow-none">
                 <div class="bg-label-primary position-relative team-image-box">
-                  <img src="<?= base_url('assets/assets/img/front-pages/landing-page/' . $val['gambar']) ?>" class="position-absolute card-img-position bottom-0 start-50 scaleX-n1-rtl" alt="konselor" />
+                  <img src="<?= base_url('assets/konselor/' . $val['gambar']) ?>" class="position-absolute card-img-position bottom-0 start-50 scaleX-n1-rtl" alt="konselor" />
                 </div>
                 <div class="card-body border border-top-0 border-label-primary text-center">
                   <h5 class="card-title mb-0"><?= $val['nama'] ?></h5>
@@ -378,7 +379,7 @@
             <a href="payment-page.html" class="btn btn-lg btn-primary">Mulai Sekarang</a>
           </div>
           <div class="col-lg-6 pt-lg-5 text-center text-lg-end">
-            <img src="<?= base_url('assets/') ?>assets/img/front-pages/landing-page/cta-dashboard.png" alt="cta dashboard" class="img-fluid" />
+            <img src="<?= base_url('assets/') ?>assets/img/front-pages/landing-page/assesment.png" alt="assesment" class="img-fluid" />
           </div>
         </div>
       </div>
