@@ -412,7 +412,7 @@
                     <small>Posted : <?= date('d-M-Y H:i:s', strtotime($d['date_created'])) ?></small><br>
                     <small>Oleh : <?= $d['posting_oleh'] ?></small>
                     <h5 class="mb-3 mt-2"><?= $d['judul'] ?></h5>
-                    <p><?= substr($d['uraian'], 0, 40) ?></p>
+                    <p><?= substr($d['uraian'], 0, 240) ?></p>
                     <div>
                       <a href="<?= base_url('front/artikel/' . $d['id']) ?>" class="btn btn-primary">Read More</a>
                     </div>
