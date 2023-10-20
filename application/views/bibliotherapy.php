@@ -93,9 +93,11 @@
                                         <tr>
                                             <th>#</th>
                                             <th>Judul Sesi</th>
-                                            <th>Waktu</th>
+                                            <th>Tanggal Acara</th>
+                                            <th>Jam Acara</th>
                                             <th>Tempat</th>
                                             <th>Cover</th>
+                                            <th>Deskripsi</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
@@ -128,25 +130,33 @@
     <!-- / Layout wrapper -->
 
     <!-- Tambah User Modal -->
-    <div class="modal fade" id="tambahbuku" tabindex="-1" aria-hidden="true">
+    <div class="modal fade" id="tambahdata" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-fullscreen">
             <div class="modal-content p-3 p-md-5">
                 <div class="modal-body">
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     <div class="text-center mb-4">
-                        <h3 class="mb-2">Tambah Buku</h3>
+                        <h3 class="mb-2">Tambah Sesi Therapy</h3>
                     </div>
                     <form id="form-data" class="row g-3">
                         <div class="col-12 col-md-12">
-                            <label class="form-label" for="judul_buku">Judul Buku</label>
-                            <input type="text" id="judul_buku" name="judul_buku" class="form-control" />
+                            <label class="form-label" for="judul_sesi">Judul Sesi</label>
+                            <input type="text" id="judul_sesi" name="judul_sesi" class="form-control" />
                         </div>
                         <div class="col-12 col-md-12">
-                            <label class="form-label" for="penulis">Penulis</label>
-                            <input type="text" id="penulis" name="penulis" class="form-control" />
+                            <label class="form-label" for="tanggal_acara">Tanggal/Hari</label>
+                            <input type="date" id="tanggal_acara" name="tanggal_acara" class="form-control" />
                         </div>
                         <div class="col-12 col-md-12">
-                            <label for="gambar" class="form-label">Gambar (Ukuran Max 1Mb)</label>
+                            <label class="form-label" for="jam_acara">Jam Acara</label>
+                            <input type="text" id="jam_acara" name="jam_acara" class="form-control" />
+                        </div>
+                        <div class="col-12 col-md-12">
+                            <label class="form-label" for="tempat">Tempat/Ruangan</label>
+                            <input type="text" id="tempat" name="tempat" class="form-control" />
+                        </div>
+                        <div class="col-12 col-md-12">
+                            <label for="gambar" class="form-label">Cover/Banner Informasi (Ukuran Max 1Mb)</label>
                             <input class="form-control" type="file" id="file" name="file">
                         </div>
                         <div class="col-12 col-md-12">
@@ -172,23 +182,31 @@
     <!--/ Tambah User Modal -->
 
     <!-- Tambah User Modal -->
-    <div class="modal fade" id="editbuku" tabindex="-1" aria-hidden="true">
+    <div class="modal fade" id="editdata" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-fullscreen">
             <div class="modal-content p-3 p-md-5">
                 <div class="modal-body">
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     <div class="text-center mb-4">
-                        <h3 class="mb-2">Edit Buku</h3>
+                        <h3 class="mb-2">Edit Sesi Bibliotherapy</h3>
                     </div>
                     <form id="form-data-edit" class="row g-3">
                         <div class="col-12 col-md-12">
-                            <label class="form-label" for="judul_buku_e">Judul Buku</label>
-                            <input type="text" id="judul_buku_e" name="judul_buku_e" class="form-control" />
+                            <label class="form-label" for="judul_sesi_e">Judul Sesi</label>
+                            <input type="text" id="judul_sesi_e" name="judul_sesi_e" class="form-control" />
                             <input type="hidden" id="id_e" name="id_e" class="form-control" />
                         </div>
                         <div class="col-12 col-md-12">
-                            <label class="form-label" for="penulis_e">Penulis</label>
-                            <input type="text" id="penulis_e" name="penulis_e" class="form-control" />
+                            <label class="form-label" for="tanggal_acara_e">Tanggal Acara</label>
+                            <input type="date" id="tanggal_acara_e" name="tanggal_acara_e" class="form-control" />
+                        </div>
+                        <div class="col-12 col-md-12">
+                            <label class="form-label" for="jam_acara_e">Jam Acara</label>
+                            <input type="text" id="jam_acara_e" name="jam_acara_e" class="form-control" />
+                        </div>
+                        <div class="col-12 col-md-12">
+                            <label class="form-label" for="tempat_e">Tempat</label>
+                            <input type="text" id="tempat_e" name="tempat_e" class="form-control" />
                         </div>
                         <div class="col-12 col-md-12">
                             <label class="form-label" for="deskripsi_e">Deskripsi</label>
@@ -219,7 +237,7 @@
                 <div class="modal-body">
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     <div class="text-center mb-4">
-                        <h3 class="mb-2">Ubah Cover Buku</h3>
+                        <h3 class="mb-2">Ubah Cover Sesi Bibliotherapy</h3>
                     </div>
                     <form id="form-data-cover" class="row g-3">
                         <div class="col-12 col-md-12">
@@ -441,7 +459,11 @@
                 }, {
                     "target": [<?= $target ?>],
                     "className": 'text-center py-1',
-                    "data": "data.waktu",
+                    "data": "data.tanggal_acara",
+                }, {
+                    "target": [<?= $target ?>],
+                    "className": 'text-center py-1',
+                    "data": "data.jam_acara",
                 }, {
                     "target": [<?= $target ?>],
                     "className": 'text-center py-1',
@@ -455,6 +477,10 @@
                         return `<img src="<?= base_url('assets/therapy/') ?>` + data.cover + `" alt="sesi" class="img-fluid" style="max-width: 80px;margin-bottom: 10px;"><br>
                                     <button type="button" class="btn btn-sm btn-success waves-effect waves-light" onclick="ubah_cover(` + data.id + `)">Ubah</button>`
                     }
+                }, {
+                    "target": [<?= $target ?>],
+                    "className": 'text-center py-1',
+                    "data": "data.deskripsi",
                 },
                 {
                     "target": [<?= $target ?>],
@@ -462,9 +488,9 @@
                     "data": "data",
                     "render": function(data) {
                         return `<div class="d-flex align-items-center">
-                                    <a href="javascript:;" class="text-body" onclick="edito('` + data.id + `','` + data.judul_sesi + `','` + data.waktu + `','` + data.tempat + `')"><i class="ti ti-edit ti-sm me-2"></i></a>
+                                    <a href="javascript:;" class="text-body" onclick="edito('` + data.id + `','` + data.judul_sesi + `','` + data.tanggal_acara + `','` + data.jam_acara + `','` + data.tempat + `','` + data.deskripsi + `')"><i class="ti ti-edit ti-sm me-2"></i></a>
                                     <a href="javascript:;" class="text-body delete-record" onclick="delete_data('` + data.id + `')"><i class="ti ti-trash ti-sm mx-2"></i></a>
-                                    <a href="<?= base_url('dashboard/peserta/') ?>` + data.id + `" class="btn btn-danger"><i class="ti ti-users"></i> Peserta</a>
+                                    <a href="<?= base_url('dashboard/peserta/') ?>` + data.id + `" class="btn btn-info"><i class="ti ti-users"></i> Peserta</a>
                                     
                                 </div>`
                     }
@@ -477,13 +503,13 @@
     });
 
     function reload_table() {
-        $('#table-buku').DataTable().ajax.reload(null, false);
+        $('#table-therapy').DataTable().ajax.reload(null, false);
     }
 
     $("#form-data").submit(function(e) {
         e.preventDefault()
 
-        if ($('#judul_buku').val() == '' || $('#penulis').val() == '' || $('#deskripsi').val() == '') {
+        if ($('#judul_sesi').val() == '' || $('#tanggal_acara').val() == '' || $('#jam_acara').val() == '' || $('#tempat').val() == '' || $('#deskripsi').val() == '') {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
@@ -497,9 +523,11 @@
         }
 
         var form_data = new FormData();
-        form_data.append('table', 'tbl_book');
-        form_data.append('judul_buku', $("#judul_buku").val());
-        form_data.append('penulis', $("#penulis").val());
+        form_data.append('table', 'tbl_sesi_bibliotherapy');
+        form_data.append('judul_sesi', $("#judul_sesi").val());
+        form_data.append('tanggal_acara', $("#tanggal_acara").val());
+        form_data.append('jam_acara', $("#jam_acara").val());
+        form_data.append('tempat', $("#tempat").val());
         form_data.append('deskripsi', $("#deskripsi").val());
 
         if ($('#file').val() !== "") {
@@ -507,7 +535,7 @@
             form_data.append('file', file_data);
         }
 
-        var url_ajax = '<?= base_url() ?>dashboard/insert_data_buku'
+        var url_ajax = '<?= base_url() ?>dashboard/insert_data_sesi'
 
         $.ajax({
             url: url_ajax,
@@ -530,21 +558,13 @@
                         },
                         buttonsStyling: false
                     })
-                    $('#judul_buku').val('')
-                    $('#penulis').val('')
-                    $('#tambahbuku').modal('hide');
+                    $('#judul_sesi').val('')
+                    $('#tanggal_acara').val('')
+                    $('#jam_acara').val('')
+                    $('#tempat').val('')
+                    $('#tambahdata').modal('hide');
                     reload_table()
 
-                } else if (result.status == "double") {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'Judul E-Book sudah pernah di daftarkan',
-                        customClass: {
-                            confirmButton: 'btn btn-primary'
-                        },
-                        buttonsStyling: false
-                    })
                 } else {
                     Swal.fire({
                         icon: 'error',
@@ -573,7 +593,7 @@
 
 
     function tambaho(id) {
-        $('#tambahbuku').modal('show')
+        $('#tambahdata').modal('show')
     }
 
     function delete_data(id) {
@@ -597,7 +617,7 @@
                         url: '<?= base_url() ?>dashboard/delete_data',
                         data: {
                             id: id,
-                            table: "tbl_book"
+                            table: "tbl_sesi_bibliotherapy"
                         },
                         type: 'post',
                         dataType: 'json',
@@ -629,12 +649,14 @@
         });
     }
 
-    function edito(id, judul_buku, penulis, deskripsi) {
-        $('#editbuku').modal('show')
+    function edito(id, judul_sesi, tanggal_acara, jam_acara, tempat, deskripsi) {
+        $('#editdata').modal('show')
 
         $('#id_e').val(id)
-        $('#judul_buku_e').val(judul_buku)
-        $('#penulis_e').val(penulis)
+        $('#judul_sesi_e').val(judul_sesi)
+        $('#tanggal_acara_e').val(tanggal_acara)
+        $('#jam_acara_e').val(jam_acara)
+        $('#tempat_e').val(tempat)
         $('#deskripsi_e').val(deskripsi)
 
         var a = deskripsi
@@ -646,7 +668,7 @@
     $("#form-data-edit").submit(function(e) {
         e.preventDefault()
 
-        if ($('#judul_buku_e').val() == '' || $('#penulis_e').val() == '' || $('#deskripsi_e').val() == '') {
+        if ($('#hudul_sesi_e').val() == '' || $('#tanggal_acara_e').val() == '' || $('#jam_acara_e').val() == '' || $('#tempat_e').val() == '' || $('#deskripsi_e').val() == '') {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
@@ -660,13 +682,15 @@
         }
 
         var form_data = new FormData();
-        form_data.append('table', 'tbl_book');
+        form_data.append('table', 'tbl_sesi_bibliotherapy');
         form_data.append('id', $("#id_e").val());
-        form_data.append('judul_buku', $("#judul_buku_e").val());
-        form_data.append('penulis', $("#penulis_e").val());
+        form_data.append('judul_sesi', $("#judul_sesi_e").val());
+        form_data.append('tanggal_acara', $("#tanggal_acara_e").val());
+        form_data.append('jam_acara', $("#jam_acara_e").val());
+        form_data.append('tempat', $("#tempat_e").val());
         form_data.append('deskripsi', $("#deskripsi_e").val());
 
-        var url_ajax = '<?= base_url() ?>dashboard/edit_data_buku'
+        var url_ajax = '<?= base_url() ?>dashboard/edit_data_sesi'
 
         $.ajax({
             url: url_ajax,
@@ -689,7 +713,7 @@
                         },
                         buttonsStyling: false
                     })
-                    $('#editbuku').modal('hide');
+                    $('#editdata').modal('hide');
                     reload_table()
 
                 } else {
@@ -722,7 +746,7 @@
         e.preventDefault()
 
         var form_data = new FormData();
-        form_data.append('table', 'tbl_book');
+        form_data.append('table', 'tbl_sesi_bibliotherapy');
         form_data.append('id', $("#id_book").val());
 
         if ($('#file_cover').val() !== "") {
@@ -730,7 +754,7 @@
             form_data.append('file', file_data);
         }
 
-        var url_ajax = '<?= base_url() ?>dashboard/ubah_cover_buku'
+        var url_ajax = '<?= base_url() ?>dashboard/ubah_cover_sesi'
 
         $.ajax({
             url: url_ajax,
@@ -745,7 +769,7 @@
                     Swal.fire({
                         position: 'top-end',
                         icon: 'success',
-                        title: 'berhasil ubah cover buku',
+                        title: 'berhasil ubah cover sesi bibliotherapy',
                         showConfirmButton: false,
                         timer: 1500,
                         customClass: {

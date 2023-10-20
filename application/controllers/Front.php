@@ -11,6 +11,7 @@ class Front extends CI_Controller
 		$data['artikel'] = $this->crud->get_all_limit('tbl_artikel')->result_array();
 		$data['book'] = $this->crud->get_all('tbl_book')->result_array();
 		$data['konselor'] = $this->crud->get_all('tbl_konselor')->result_array();
+		$data['sesi'] = $this->crud->get_all('tbl_sesi_bibliotherapy')->result_array();
 
 		$this->load->view('front', $data);
 	}
@@ -49,6 +50,23 @@ class Front extends CI_Controller
 			$response = ['status' => 'success', 'message' => 'Berhasil Ambil Data!', 'data' => $result];
 		} else
 			$response = ['status' => 'error', 'message' => 'Data Kosong!'];
+
+		echo json_encode($response);
+	}
+
+	public function insert_daftar()
+	{
+		$table = $this->input->post("table");
+
+		$data = $this->input->post();
+		unset($data['table']);
+		$insert_data = $this->crud->insert($table, $data);
+
+		if ($insert_data > 0) {
+
+			$response = ['status' => 'success', 'message' => 'Berhasil Tambah Data!'];
+		} else
+			$response = ['status' => 'error', 'message' => 'Gagal Tambah Data!'];
 
 		echo json_encode($response);
 	}

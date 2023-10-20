@@ -30,6 +30,7 @@
 
   <link rel="stylesheet" href="<?= base_url('assets/') ?>assets/vendor/libs/nouislider/nouislider.css" />
   <link rel="stylesheet" href="<?= base_url('assets/') ?>assets/vendor/libs/swiper/swiper.css" />
+  <link rel="stylesheet" href="<?= base_url('assets/') ?>assets/vendor/libs/sweetalert2/sweetalert2.css" />
 
   <!-- Page CSS -->
 
@@ -439,27 +440,41 @@
         <h3 class="text-center mb-1"><span class="section-title">Bibliotheraphy</span> Sessions</h3>
         <p class="text-center mb-4 mb-lg-5 pb-md-3">Jadwal Sesi Bibliotheraphy Individual maupun Kelompok</p>
         <div class="row gy-4">
-          <div class="col-lg-5">
-            <div class="contact-img-box position-relative border p-2 h-100">
-              <img src="<?= base_url('assets/ebook/book6.jpg') ?>" alt="Bibliotheraphy" class="contact-img w-100 scaleX-n1-rtl" />
-
+          <?php
+          foreach ($sesi as $key => $k) {
+          ?>
+            <div class="col-lg-3">
+              <div class="contact-img-box position-relative border p-2 h-100">
+                <img src="<?= base_url('assets/ebook/' . $k['cover']) ?>" alt="Bibliotheraphy" class="contact-img w-100 scaleX-n1-rtl" />
+              </div>
             </div>
-          </div>
-          <div class="col-lg-7">
-            <div class="card">
-              <div class="card-body">
-                <h4 class="mb-1">Atomic Habits</h4>
-                <p class="mb-4 mt-5 lh-lg">
-                <div class="mb-2">Kamis, 10 September 2023</div>
-                <div class="mb-2">Waktu : 15:00 WIB</div>
-                <div class="mb-2">Ruang PBK3 UM Gedung B17 Lantai 1</div>
-                <div class="mb-2">
-                  <button type="button" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#basicModal">
-                    Daftar
-                  </button>
-                </div>
-                </p>
-                <!-- <form>
+            <div class="col-lg-9">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="mb-1"><?= $k['judul_sesi'] ?></h4>
+                  <div class="row">
+                    <div class="col-3">Tanggal</div>
+                    <div class="col-9">: <?= date('d-M-Y', strtotime($k['tanggal_acara'])) ?></div>
+                  </div>
+                  <div class="row">
+                    <div class="col-3">Waktu Acara</div>
+                    <div class="col-9">: <?= $k['jam_acara'] ?></div>
+                  </div>
+                  <div class="row">
+                    <div class="col-3">Tempat Acara</div>
+                    <div class="col-9">: <?= $k['tempat'] ?></div>
+                  </div>
+                  <div class="mb-1 mt-3">
+                    <h6><strong>Deskripsi :</strong></h6>
+                    <p><?= $k['deskripsi'] ?></p>
+                  </div>
+                  <div class="mb-2">
+                    <button type="button" class="btn btn-primary waves-effect waves-light" onclick="daftar('<?= $k['id'] ?>')">
+                      Daftar
+                    </button>
+                  </div>
+                  </p>
+                  <!-- <form>
                   <div class="row g-3">
                     <div class="col-md-6">
                       <label class="form-label" for="contact-form-fullname">Full Name</label>
@@ -478,9 +493,12 @@
                     </div>
                   </div>
                 </form> -->
+                </div>
               </div>
             </div>
-          </div>
+          <?php
+          }
+          ?>
         </div>
       </div>
     </section>
@@ -584,93 +602,66 @@
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel1">Sesi Bibliotherapy</h5>
+          <h5 class="modal-title text-center" id="exampleModalLabel1">Form Pendaftaran Sesi Bibliotherapy</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">
-          <div class="row text-center mt-3">
-            <p>Silahkan isi biodata Anda untuk melakukan pendaftaran Sesi Bibliotherapy</p>
-          </div>
-          <div class="row g-2">
-            <div class="col mb-3">
-              <label for="nameBasic" class="form-label">Nama</label>
-              <input type="text" id="nameBasic" class="form-control" placeholder="Contoh : Budi Setya Nugraha">
+        <form id="form-data" class="row g-3">
+          <div class="modal-body">
+            <div class="row text-center mt-3">
+              <p>Silahkan isi biodata Anda untuk melakukan pendaftaran Sesi Bibliotherapy</p>
+            </div>
+            <div class="row g-2">
+              <div class="col mb-3">
+                <label for="nama" class="form-label">Nama</label>
+                <input type="text" id="nama" class="form-control" placeholder="Contoh : Budi Setya Nugraha">
+              </div>
+            </div>
+            <div class="row g-2">
+              <div class="col mb-0">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" id="email" class="form-control" placeholder="budi.setya@gmail.com">
+              </div>
+            </div>
+            <div class="row g-2">
+              <div class="col mb-0">
+                <label for="handphone" class="form-label">Nomor Handphone</label>
+                <input type="text" id="handphone" class="form-control" placeholder="Contoh : 08190909090">
+              </div>
+            </div>
+            <div class="row g-2">
+              <div class="col mb-0">
+                <label for="fakultas" class="form-label">Fakultas</label>
+                <input type="text" id="fakultas" class="form-control" placeholder="Contoh : Ilmu Pendidikan">
+              </div>
+            </div>
+            <div class="row g-2">
+              <div class="col mb-0">
+                <label for="jurusan" class="form-label">Jurusan</label>
+                <input type="text" id="jurusan" class="form-control" placeholder="Contoh : Bimbingan dan Konseling">
+              </div>
+            </div>
+            <div class="row g-2">
+              <div class="col mb-0">
+                <label for="nik" class="form-label">NIK</label>
+                <input type="text" id="nik" class="form-control">
+              </div>
             </div>
           </div>
-          <div class="row g-2">
-            <div class="col mb-0">
-              <label for="email" class="form-label">Email</label>
-              <input type="email" id="email" class="form-control" placeholder="budi.setya@gmail.com">
-            </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-label-secondary waves-effect" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary waves-effect waves-light">Submit</button>
           </div>
-          <div class="row g-2">
-            <div class="col mb-0">
-              <label for="handphone" class="form-label">Nomor Handphone</label>
-              <input type="text" id="handphone" class="form-control" placeholder="Contoh : 08190909090">
-            </div>
-          </div>
-          <div class="row g-2">
-            <div class="col mb-0">
-              <label for="fakultas" class="form-label">Fakultas</label>
-              <input type="text" id="fakultas" class="form-control" placeholder="Contoh : Ilmu Pendidikan">
-            </div>
-          </div>
-          <div class="row g-2">
-            <div class="col mb-0">
-              <label for="jurusan" class="form-label">Jurusan</label>
-              <input type="text" id="jurusan" class="form-control" placeholder="Contoh : Bimbingan dan Konseling">
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-label-secondary waves-effect" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary waves-effect waves-light">Submit</button>
-        </div>
+        </form>
       </div>
     </div>
   </div>
   <!-- end modal daftar -->
 
-  <!-- Tambah User Modal -->
-  <div class="modal fade" id="daftarsesi" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-simple modal-edit-user modal-dialog-centered">
-      <div class="modal-content p-3 p-md-5">
-        <div class="modal-body">
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          <div class="text-center mb-4">
-            <h3 class="mb-2">Sesi Bibliotherapy</h3>
 
-          </div>
-          <form id="form-data" class="row g-3">
-            <div class="col-12 col-md-12">
-              <label class="form-label" for="nama">Nama Lengkap</label>
-              <input type="text" id="nama" name="nama" class="form-control" />
-            </div>
-            <div class="col-12 col-md-12">
-              <label class="form-label" for="no_hp">No Handphone</label>
-              <input type="text" id="no_hp" name="no_hp" class="form-control" />
-            </div>
-            <div class="col-12 col-md-12">
-              <label class="form-label" for="email">Email</label>
-              <input type="text" id="email" name="email" class="form-control" />
-            </div>
-
-
-            <div class="col-12 text-center">
-              <button type="submit" class="btn btn-primary me-sm-3 me-1">Daftar</button>
-              <button type="reset" class="btn btn-label-secondary" data-bs-dismiss="modal" aria-label="Close">
-                Cancel
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!--/ Tambah User Modal -->
 
   <!-- Core JS -->
   <!-- build:js assets/vendor/js/core.js -->
+  <script src="<?= base_url('assets/') ?>assets/vendor/libs/jquery/jquery.js"></script>
   <script src="<?= base_url('assets/') ?>assets/vendor/libs/popper/popper.js"></script>
   <script src="<?= base_url('assets/') ?>assets/vendor/js/bootstrap.js"></script>
   <script src="<?= base_url('assets/') ?>assets/vendor/libs/node-waves/node-waves.js"></script>
@@ -686,6 +677,97 @@
 
   <!-- Page JS -->
   <script src="<?= base_url('assets/') ?>assets/js/front-page-landing.js"></script>
+  <script src="<?= base_url('assets/') ?>assets/vendor/libs/sweetalert2/sweetalert2.js"></script>
 </body>
 
 </html>
+
+<script>
+  function daftar() {
+    $('#basicModal').modal('show')
+  }
+
+  $("#form-data").submit(function(e) {
+    e.preventDefault()
+
+    if ($('#nama').val() == '' || $('#email').val() == '' || $('#handphone').val() == '' || $('#fakultas').val() == '' || $('#jurusan').val() == '' || $('#nik').val() == '') {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Tidak boleh ada kolom kosong!',
+        customClass: {
+          confirmButton: 'btn btn-primary'
+        },
+        buttonsStyling: false
+      })
+      return
+    }
+
+    var form_data = new FormData();
+    form_data.append('table', 'tbl_peserta');
+    form_data.append('id_tbl_sesi_bibliotherapy', $("#nama").val());
+    form_data.append('judul_sesi', $("#nama").val());
+    form_data.append('nama', $("#nama").val());
+    form_data.append('email', $("#email").val());
+    form_data.append('handphone', $("#handphone").val());
+    form_data.append('fakultas', $("#fakultas").val());
+    form_data.append('jurusan', $("#jurusan").val());
+    form_data.append('nik', $("#nik").val());
+
+    var url_ajax = '<?= base_url() ?>front/insert_daftar'
+
+    $.ajax({
+      url: url_ajax,
+      type: "post",
+      cache: false,
+      contentType: false,
+      processData: false,
+      data: form_data,
+      dataType: "json",
+      success: function(result) {
+        if (result.status == "success") {
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'berhasil register sesi Bibliotherapy',
+            showConfirmButton: false,
+            timer: 1500,
+            customClass: {
+              confirmButton: 'btn btn-primary'
+            },
+            buttonsStyling: false
+          })
+          $('#nama').val('')
+          $('#email').val('')
+          $('#handphone').val('')
+          $('#fakultas').val('')
+          $('#jurusan').val('')
+          $('#nik').val('')
+          $('#daftar').modal('hide');
+
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Gagal register',
+            customClass: {
+              confirmButton: 'btn btn-primary'
+            },
+            buttonsStyling: false
+          })
+        }
+      },
+      error: function(err) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Telah terjadi kesalahan, silahkan contact CS',
+          customClass: {
+            confirmButton: 'btn btn-primary'
+          },
+          buttonsStyling: false
+        })
+      }
+    })
+  })
+</script>

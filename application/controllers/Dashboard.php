@@ -29,6 +29,11 @@ class Dashboard extends CI_Controller
         $this->load->view('bibliotherapy');
     }
 
+    public function peserta()
+    {
+        $this->load->view('peserta');
+    }
+
     public function ajax_table_user()
     {
         $table = 'mst_user'; //nama tabel dari database
@@ -161,9 +166,9 @@ class Dashboard extends CI_Controller
     public function ajax_table_therapy()
     {
         $table = 'tbl_sesi_bibliotherapy'; //nama tabel dari database
-        $column_order = array('id', 'judul_sesi', 'waktu', 'tempat', 'cover', 'date_created'); //field yang ada di table user
-        $column_search = array('id', 'judul_sesi', 'waktu', 'tempat', 'cover', 'date_created'); //field yang diizin untuk pencarian 
-        $select = 'id, judul_sesi, waktu, tempat, cover, date_created';
+        $column_order = array('id', 'judul_sesi', 'tanggal_acara', 'jam_acara', 'tempat', 'cover', 'deskripsi', 'date_created'); //field yang ada di table user
+        $column_search = array('id', 'judul_sesi', 'tanggal_acara', 'jam_acara', 'tempat', 'cover', 'deskripsi', 'date_created'); //field yang diizin untuk pencarian 
+        $select = 'id, judul_sesi, tanggal_acara, jam_acara,tempat, cover, deskripsi, date_created';
         $order = array('id' => 'asc'); // default order 
         $list = $this->crud->get_datatables($table, $select, $column_order, $column_search, $order);
         $data = array();
@@ -174,9 +179,11 @@ class Dashboard extends CI_Controller
             $row['data']['no'] = $no;
             $row['data']['id'] = $key->id;
             $row['data']['judul_sesi'] = $key->judul_sesi;
-            $row['data']['waktu'] = $key->waktu;
+            $row['data']['tanggal_acara'] = date('d-M-Y', strtotime($key->tanggal_acara));
+            $row['data']['jam_acara'] = $key->jam_acara;
             $row['data']['tempat'] = $key->tempat;
             $row['data']['cover'] = $key->cover;
+            $row['data']['deskripsi'] = $key->deskripsi;
             $row['data']['date_created'] = date('d-M-Y', strtotime($key->date_created));
 
             $data[] = $row;
@@ -186,6 +193,49 @@ class Dashboard extends CI_Controller
             "draw" => $_POST['draw'],
             "recordsTotal" => $this->crud->count_all($table),
             "recordsFiltered" => $this->crud->count_filtered($table, $select, $column_order, $column_search, $order),
+            "data" => $data,
+            "query" => $this->db->last_query()
+        );
+        //output to json format
+        echo json_encode($output);
+    }
+
+    public function ajax_table_peserta()
+    {
+        $where = array(
+            'id_tbl_sesi_bibliotherapy' => $this->input->post('id')
+        );
+
+        $table = 'tbl_peserta'; //nama tabel dari database
+        $column_order = array('id', 'id_tbl_sesi_bibliotherapy', 'judul_sesi', 'nama', 'nik', 'fakultas', 'jurusan', 'email', 'handphone', 'date_created'); //field yang ada di table user
+        $column_search = array('id', 'id_tbl_sesi_bibliotherapy', 'judul_sesi', 'nama', 'nik', 'fakultas', 'jurusan', 'email', 'handphone', 'date_created'); //field yang diizin untuk pencarian 
+        $select = 'id, id_tbl_sesi_bibliotherapy, judul_sesi, nama, nik, fakultas, jurusan,email,handphone,date_created';
+        $order = array('id' => 'asc'); // default order 
+        $list = $this->crud->get_datatables($table, $select, $column_order, $column_search, $order, $where);
+        $data = array();
+        $no = $_POST['start'];
+        foreach ($list as $key) {
+            $no++;
+            $row = array();
+            $row['data']['no'] = $no;
+            $row['data']['id'] = $key->id;
+            $row['data']['id_tbl_sesi_bibliotherapy'] = $key->id_tbl_sesi_bibliotherapy;
+            $row['data']['judul_sesi'] = $key->judul_sesi;
+            $row['data']['nama'] = $key->nama;
+            $row['data']['nik'] = $key->nik;
+            $row['data']['fakultas'] = $key->fakultas;
+            $row['data']['jurusan'] = $key->jurusan;
+            $row['data']['email'] = $key->email;
+            $row['data']['handphone'] = $key->handphone;
+            $row['data']['date_created'] = date('d-M-Y', strtotime($key->date_created));
+
+            $data[] = $row;
+        }
+
+        $output = array(
+            "draw" => $_POST['draw'],
+            "recordsTotal" => $this->crud->count_all($table),
+            "recordsFiltered" => $this->crud->count_filtered($table, $select, $column_order, $column_search, $order, $where),
             "data" => $data,
             "query" => $this->db->last_query()
         );
@@ -272,6 +322,50 @@ class Dashboard extends CI_Controller
         $id = $this->input->post("id");
 
         $config['upload_path']          = "assets/ebook/";
+        $config['allowed_types']        = 'jpg|png|jpeg|JPG|PNG|JPEG';
+        $config['max_size']             = 1024;
+        $config['max_width']            = 5000;
+        $config['max_height']           = 5000;
+
+        $this->load->library('upload', $config);
+        $data = $this->input->post();
+        unset($data['table']);
+        unset($data['id']);
+
+        if (count($_FILES) > 0) {
+            if (!$this->upload->do_upload('file')) {
+                $response = array('status' => 'failed', 'message' => $this->upload->display_errors());
+                echo json_encode($response);
+                die;
+            }
+            $data_upload = $this->upload->data();
+            $data['cover'] = $data_upload['file_name'];
+        } else {
+            $data['cover'] = 'default.png';
+        }
+
+        $where = array(
+            'id' => $id
+        );
+
+        $update = $this->crud->update($table, $data, $where);
+
+
+        if ($update > 0) {
+            $response = ['status' => 'success', 'message' => 'Berhasil Ubah Data!'];
+        } else
+            $response = ['status' => 'error', 'message' => 'Gagal Ubah Data!'];
+
+        echo json_encode($response);
+    }
+
+    public function ubah_cover_sesi()
+    {
+
+        $table = $this->input->post("table");
+        $id = $this->input->post("id");
+
+        $config['upload_path']          = "assets/therapy/";
         $config['allowed_types']        = 'jpg|png|jpeg|JPG|PNG|JPEG';
         $config['max_size']             = 1024;
         $config['max_width']            = 5000;
@@ -569,6 +663,68 @@ class Dashboard extends CI_Controller
             $response = ['status' => 'success', 'message' => 'Berhasil Ubah Data!'];
         } else
             $response = ['status' => 'error', 'message' => 'Gagal Ubah Data!'];
+
+        echo json_encode($response);
+    }
+
+    public function insert_data_sesi()
+    {
+        $table = $this->input->post("table");
+
+        $config['upload_path']          = "assets/therapy/";
+        $config['allowed_types']        = 'jpg|png|jpeg|JPG|PNG|JPEG';
+        $config['max_size']             = 1024;
+        $config['max_width']            = 5000;
+        $config['max_height']           = 5000;
+
+        $this->load->library('upload', $config);
+        $data = $this->input->post();
+        unset($data['table']);
+        // unset($data['password']);
+
+        if (count($_FILES) > 0) {
+            if (!$this->upload->do_upload('file')) {
+                $response = array('status' => 'failed', 'message' => $this->upload->display_errors());
+                echo json_encode($response);
+                die;
+            }
+            $data_upload = $this->upload->data();
+            $data['cover'] = $data_upload['file_name'];
+        } else {
+            $data['cover'] = 'default.png';
+        }
+
+
+
+        $insert_data = $this->crud->insert($table, $data);
+
+
+        if ($insert_data > 0) {
+            $response = ['status' => 'success', 'message' => 'Berhasil Tambah Data!'];
+        } else
+            $response = ['status' => 'error', 'message' => 'Gagal Tambah Data!'];
+
+        echo json_encode($response);
+    }
+
+    public function edit_data_sesi()
+    {
+        $table = $this->input->post("table");
+        $data = $this->input->post();
+        unset($data['table']);
+
+        $where = array(
+            'id' => $data['id']
+        );
+        unset($data['id']);
+
+        $update = $this->crud->update($table, $data, $where);
+
+
+        if ($update > 0) {
+            $response = ['status' => 'success', 'message' => 'Berhasil Tambah Data!'];
+        } else
+            $response = ['status' => 'error', 'message' => 'Gagal Tambah Data!'];
 
         echo json_encode($response);
     }
