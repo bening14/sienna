@@ -469,7 +469,7 @@
                     <p><?= $k['deskripsi'] ?></p>
                   </div>
                   <div class="mb-2">
-                    <button type="button" class="btn btn-primary waves-effect waves-light" onclick="daftar('<?= $k['id'] ?>')">
+                    <button type="button" class="btn btn-primary waves-effect waves-light" onclick="daftar('<?= $k['id'] ?>','<?= $k['judul_sesi'] ?>')">
                       Daftar
                     </button>
                   </div>
@@ -614,6 +614,8 @@
               <div class="col mb-3">
                 <label for="nama" class="form-label">Nama</label>
                 <input type="text" id="nama" class="form-control" placeholder="Contoh : Budi Setya Nugraha">
+                <input type="hidden" id="id" class="form-control">
+                <input type="hidden" id="judul" class="form-control">
               </div>
             </div>
             <div class="row g-2">
@@ -683,8 +685,10 @@
 </html>
 
 <script>
-  function daftar() {
+  function daftar(id, judul) {
     $('#basicModal').modal('show')
+    $('#id').val(id)
+    $('#judul').val(judul)
   }
 
   $("#form-data").submit(function(e) {
@@ -705,8 +709,8 @@
 
     var form_data = new FormData();
     form_data.append('table', 'tbl_peserta');
-    form_data.append('id_tbl_sesi_bibliotherapy', $("#nama").val());
-    form_data.append('judul_sesi', $("#nama").val());
+    form_data.append('id_tbl_sesi_bibliotherapy', $("#id").val());
+    form_data.append('judul_sesi', $("#judul").val());
     form_data.append('nama', $("#nama").val());
     form_data.append('email', $("#email").val());
     form_data.append('handphone', $("#handphone").val());
@@ -727,11 +731,9 @@
       success: function(result) {
         if (result.status == "success") {
           Swal.fire({
-            position: 'top-end',
             icon: 'success',
-            title: 'berhasil register sesi Bibliotherapy',
-            showConfirmButton: false,
-            timer: 1500,
+            title: 'Berhasil',
+            text: 'Terima kasih telah mendaftar sesi Bibliotherapy, Mohon hadir tepat waktu pada waktu dan tempat yang telah ditentukan.',
             customClass: {
               confirmButton: 'btn btn-primary'
             },
@@ -743,7 +745,7 @@
           $('#fakultas').val('')
           $('#jurusan').val('')
           $('#nik').val('')
-          $('#daftar').modal('hide');
+          $('#basicModal').modal('hide');
 
         } else {
           Swal.fire({

@@ -56,6 +56,8 @@ class Front extends CI_Controller
 
 	public function insert_daftar()
 	{
+		$this->load->model("Crud", "crud");
+
 		$table = $this->input->post("table");
 
 		$data = $this->input->post();
