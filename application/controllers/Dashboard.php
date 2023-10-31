@@ -34,6 +34,12 @@ class Dashboard extends CI_Controller
         $this->load->view('peserta');
     }
 
+    public function kuisioner()
+    {
+        $this->load->view('kuisioner');
+    }
+
+
     public function ajax_table_user()
     {
         $table = 'mst_user'; //nama tabel dari database
@@ -249,7 +255,7 @@ class Dashboard extends CI_Controller
 
         $config['upload_path']          = "assets/ebook/";
         $config['allowed_types']        = 'jpg|png|jpeg|JPG|PNG|JPEG';
-        $config['max_size']             = 1024;
+        $config['max_size']             = 10024;
         $config['max_width']            = 5000;
         $config['max_height']           = 5000;
 
@@ -323,7 +329,7 @@ class Dashboard extends CI_Controller
 
         $config['upload_path']          = "assets/ebook/";
         $config['allowed_types']        = 'jpg|png|jpeg|JPG|PNG|JPEG';
-        $config['max_size']             = 1024;
+        $config['max_size']             = 10024;
         $config['max_width']            = 5000;
         $config['max_height']           = 5000;
 
@@ -367,7 +373,7 @@ class Dashboard extends CI_Controller
 
         $config['upload_path']          = "assets/therapy/";
         $config['allowed_types']        = 'jpg|png|jpeg|JPG|PNG|JPEG';
-        $config['max_size']             = 1024;
+        $config['max_size']             = 10024;
         $config['max_width']            = 5000;
         $config['max_height']           = 5000;
 
@@ -448,7 +454,7 @@ class Dashboard extends CI_Controller
 
         $config['upload_path']          = "assets/konselor/";
         $config['allowed_types']        = 'jpg|png|jpeg|JPG|PNG|JPEG';
-        $config['max_size']             = 1024;
+        $config['max_size']             = 10024;
         $config['max_width']            = 5000;
         $config['max_height']           = 5000;
 
@@ -510,7 +516,7 @@ class Dashboard extends CI_Controller
 
         $config['upload_path']          = "assets/konselor/";
         $config['allowed_types']        = 'jpg|png|jpeg|JPG|PNG|JPEG';
-        $config['max_size']             = 1024;
+        $config['max_size']             = 10024;
         $config['max_width']            = 5000;
         $config['max_height']           = 5000;
 
@@ -592,7 +598,7 @@ class Dashboard extends CI_Controller
 
         $config['upload_path']          = "assets/artikel/";
         $config['allowed_types']        = 'jpg|png|jpeg|JPG|PNG|JPEG';
-        $config['max_size']             = 1024;
+        $config['max_size']             = 10024;
         $config['max_width']            = 5000;
         $config['max_height']           = 5000;
 
@@ -631,7 +637,7 @@ class Dashboard extends CI_Controller
 
         $config['upload_path']          = "assets/artikel/";
         $config['allowed_types']        = 'jpg|png|jpeg|JPG|PNG|JPEG';
-        $config['max_size']             = 1024;
+        $config['max_size']             = 10024;
         $config['max_width']            = 5000;
         $config['max_height']           = 5000;
 
@@ -673,7 +679,7 @@ class Dashboard extends CI_Controller
 
         $config['upload_path']          = "assets/therapy/";
         $config['allowed_types']        = 'jpg|png|jpeg|JPG|PNG|JPEG';
-        $config['max_size']             = 1024;
+        $config['max_size']             = 10024;
         $config['max_width']            = 5000;
         $config['max_height']           = 5000;
 
@@ -727,5 +733,54 @@ class Dashboard extends CI_Controller
             $response = ['status' => 'error', 'message' => 'Gagal Tambah Data!'];
 
         echo json_encode($response);
+    }
+
+    public function ajax_table_kuisioner()
+    {
+        $table = 'tbl_kuisioner'; //nama tabel dari database
+        $column_order = array('id', 'nama', 'email', 'tanggal_lahir', 'jenis_kelamin', 'q1', 'q2', 'q3', 'q4', 'q5', 'q6', 'q7', 'q8', 'q9', 'q10', 'q11', 'q12', 'q13', 'q14', 'date_created'); //field yang ada di table user
+        $column_search = array('id', 'nama', 'email', 'tanggal_lahir', 'jenis_kelamin', 'q1', 'q2', 'q3', 'q4', 'q5', 'q6', 'q7', 'q8', 'q9', 'q10', 'q11', 'q12', 'q13', 'q14', 'date_created'); //field yang diizin untuk pencarian 
+        $select = 'id, nama, email, tanggal_lahir, jenis_kelamin, q1, q2,q3,q4,q5,q6,q7,q8,q9,q10,q11,q12,q13,q14,date_created';
+        $order = array('id' => 'asc'); // default order 
+        $list = $this->crud->get_datatables($table, $select, $column_order, $column_search, $order);
+        $data = array();
+        $no = $_POST['start'];
+        foreach ($list as $key) {
+            $no++;
+            $row = array();
+            $row['data']['no'] = $no;
+            $row['data']['id'] = $key->id;
+            $row['data']['nama'] = $key->nama;
+            $row['data']['email'] = $key->email;
+            $row['data']['tanggal_lahir'] = date('d-M-Y', strtotime($key->tanggal_lahir));
+            $row['data']['jenis_kelamin'] = $key->jenis_kelamin;
+            $row['data']['q1'] = $key->q1;
+            $row['data']['q2'] = $key->q2;
+            $row['data']['q3'] = $key->q3;
+            $row['data']['q4'] = $key->q4;
+            $row['data']['q5'] = $key->q5;
+            $row['data']['q6'] = $key->q6;
+            $row['data']['q7'] = $key->q7;
+            $row['data']['q8'] = $key->q8;
+            $row['data']['q9'] = $key->q9;
+            $row['data']['q10'] = $key->q10;
+            $row['data']['q11'] = $key->q11;
+            $row['data']['q12'] = $key->q12;
+            $row['data']['q13'] = $key->q13;
+            $row['data']['q14'] = $key->q14;
+            $row['data']['date_created'] = date('d-M-Y H:i:s', strtotime($key->date_created));
+
+            $data[] = $row;
+        }
+
+        $output = array(
+            "draw" => $_POST['draw'],
+            "recordsTotal" => $this->crud->count_all($table),
+            "recordsFiltered" => $this->crud->count_filtered($table, $select, $column_order, $column_search, $order),
+            "data" => $data,
+            "query" => $this->db->last_query()
+        );
+        //output to json format
+        echo json_encode($output);
     }
 }

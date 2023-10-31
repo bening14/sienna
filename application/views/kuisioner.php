@@ -87,27 +87,38 @@
                             <div class="card-header border-bottom" style="text-align: right;">
                                 <div class="d-flex justify-content-between">
                                     <div>
-                                        <h4>Peserta Bibliotherapy</h4>
+                                        <h4>Data Kuisioner</h4>
                                     </div>
-                                    <div>
-                                        <a href="<?= base_url('dashboard/bibliotherapy') ?>" class="btn btn-sm btn-danger"><i class="ti ti-arrow-narrow-left"></i> Kembali</a>
-                                    </div>
+                                    <!-- <div>
+                                        <a href="<?= base_url('dashboard/kuisioner') ?>" class="btn btn-sm btn-danger"><i class="ti ti-arrow-narrow-left"></i> Kembali</a>
+                                    </div> -->
                                 </div>
-
                             </div>
                             <div class="card-datatable table-responsive">
-                                <table id="table-peserta" class="table">
+                                <table id="table-kuisioner" class="table">
                                     <thead class="border-top">
                                         <tr>
                                             <th>#</th>
                                             <th>Nama</th>
-                                            <th>NIK</th>
-                                            <th>Fakultas</th>
-                                            <th>Jurusan</th>
                                             <th>Email</th>
-                                            <th>Handphone</th>
-                                            <th>Date Register</th>
-                                            <th>Actions</th>
+                                            <th>Tanggal Lahir</th>
+                                            <th>Jenis Kelamin</th>
+                                            <th>Q1</th>
+                                            <th>Q2</th>
+                                            <th>Q3</th>
+                                            <th>Q4</th>
+                                            <th>Q5</th>
+                                            <th>Q6</th>
+                                            <th>Q7</th>
+                                            <th>Q8</th>
+                                            <th>Q9</th>
+                                            <th>Q10</th>
+                                            <th>Q11</th>
+                                            <th>Q12</th>
+                                            <th>Q13</th>
+                                            <th>Q14</th>
+                                            <th>Date Submit</th>
+                                            <th>Aksi</th>
                                         </tr>
                                     </thead>
                                 </table>
@@ -183,7 +194,7 @@
 <script>
     <?php $target = 0; ?>
     $(function() {
-        $("#table-peserta").DataTable({
+        $("#table-kuisioner").DataTable({
             "responsive": false,
             "lengthChange": true,
             "autoWidth": false,
@@ -194,7 +205,7 @@
             ],
             'ajax': {
                 'dataType': 'json',
-                'url': '<?= base_url() ?>dashboard/ajax_table_peserta',
+                'url': '<?= base_url() ?>dashboard/ajax_table_kuisioner',
                 'type': 'post',
                 'data': {
                     id: '<?= $this->uri->segment('3') ?>'
@@ -211,23 +222,71 @@
                 }, {
                     "target": [<?= $target ?>],
                     "className": 'text-center py-1',
-                    "data": "data.nik",
-                }, {
-                    "target": [<?= $target ?>],
-                    "className": 'text-center py-1',
-                    "data": "data.fakultas",
-                }, {
-                    "target": [<?= $target ?>],
-                    "className": 'text-center py-1',
-                    "data": "data.jurusan",
-                }, {
-                    "target": [<?= $target ?>],
-                    "className": 'text-center py-1',
                     "data": "data.email",
                 }, {
                     "target": [<?= $target ?>],
                     "className": 'text-center py-1',
-                    "data": "data.handphone",
+                    "data": "data.tanggal_lahir",
+                }, {
+                    "target": [<?= $target ?>],
+                    "className": 'text-center py-1',
+                    "data": "data.jenis_kelamin",
+                }, {
+                    "target": [<?= $target ?>],
+                    "className": 'text-center py-1',
+                    "data": "data.q1",
+                }, {
+                    "target": [<?= $target ?>],
+                    "className": 'text-center py-1',
+                    "data": "data.q2",
+                }, {
+                    "target": [<?= $target ?>],
+                    "className": 'text-center py-1',
+                    "data": "data.q3",
+                }, {
+                    "target": [<?= $target ?>],
+                    "className": 'text-center py-1',
+                    "data": "data.q4",
+                }, {
+                    "target": [<?= $target ?>],
+                    "className": 'text-center py-1',
+                    "data": "data.q5",
+                }, {
+                    "target": [<?= $target ?>],
+                    "className": 'text-center py-1',
+                    "data": "data.q6",
+                }, {
+                    "target": [<?= $target ?>],
+                    "className": 'text-center py-1',
+                    "data": "data.q7",
+                }, {
+                    "target": [<?= $target ?>],
+                    "className": 'text-center py-1',
+                    "data": "data.q8",
+                }, {
+                    "target": [<?= $target ?>],
+                    "className": 'text-center py-1',
+                    "data": "data.q9",
+                }, {
+                    "target": [<?= $target ?>],
+                    "className": 'text-center py-1',
+                    "data": "data.q10",
+                }, {
+                    "target": [<?= $target ?>],
+                    "className": 'text-center py-1',
+                    "data": "data.q11",
+                }, {
+                    "target": [<?= $target ?>],
+                    "className": 'text-center py-1',
+                    "data": "data.q12",
+                }, {
+                    "target": [<?= $target ?>],
+                    "className": 'text-center py-1',
+                    "data": "data.q13",
+                }, {
+                    "target": [<?= $target ?>],
+                    "className": 'text-center py-1',
+                    "data": "data.q14",
                 }, {
                     "target": [<?= $target ?>],
                     "className": 'text-center py-1',
@@ -252,7 +311,7 @@
     });
 
     function reload_table() {
-        $('#table-peserta').DataTable().ajax.reload(null, false);
+        $('#table-kuisioner').DataTable().ajax.reload(null, false);
     }
 
     function delete_data(id) {
@@ -276,7 +335,7 @@
                         url: '<?= base_url() ?>dashboard/delete_data',
                         data: {
                             id: id,
-                            table: "tbl_peserta"
+                            table: "tbl_kuisioner"
                         },
                         type: 'post',
                         dataType: 'json',

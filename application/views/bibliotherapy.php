@@ -86,7 +86,15 @@
                         <!-- Users List Table -->
                         <div class="card">
                             <div class="card-header border-bottom" style="text-align: right;">
-                                <button class="btn btn-sm btn-danger" onclick="tambaho()"><i class="ti ti-plus"></i> Buat Sesi Therapy</button>
+                                <div class="d-flex justify-content-between">
+                                    <div>
+                                        <h4>Data Sesi Bibliotherapy</h4>
+                                    </div>
+                                    <div>
+                                        <button class="btn btn-sm btn-danger" onclick="tambaho()"><i class="ti ti-plus"></i> Buat Sesi Therapy</button>
+                                    </div>
+                                </div>
+
                             </div>
                             <div class="card-datatable table-responsive">
                                 <table id="table-therapy" class="table">

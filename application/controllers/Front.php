@@ -72,4 +72,62 @@ class Front extends CI_Controller
 
 		echo json_encode($response);
 	}
+
+	public function asessment()
+	{
+		$this->load->view('self_asessment');
+	}
+
+	public function simpan_kuesioner()
+	{
+		$email = $this->input->post('email');
+		$nama = $this->input->post('nama');
+		$tanggal_lahir = $this->input->post('tanggal_lahir');
+		$jenis_kelamin = $this->input->post('jenis_kelamin');
+		$q1 = $this->input->post('q1');
+		$q2 = $this->input->post('q2');
+		$q3 = $this->input->post('q3');
+		$q4 = $this->input->post('q4');
+		$q5 = $this->input->post('q5');
+		$q6 = $this->input->post('q6');
+		$q7 = $this->input->post('q7');
+		$q8 = $this->input->post('q8');
+		$q9 = $this->input->post('q9');
+		$q10 = $this->input->post('q10');
+		$q11 = $this->input->post('q11');
+		$q12 = $this->input->post('q12');
+		$q13 = $this->input->post('q13');
+		$q14 = $this->input->post('q14');
+
+		$data = array(
+			'email' => $email,
+			'nama' => $nama,
+			'tanggal_lahir' => $tanggal_lahir,
+			'jenis_kelamin' => $jenis_kelamin,
+			'q1' => $q1,
+			'q2' => $q2,
+			'q3' => $q3,
+			'q4' => $q4,
+			'q5' => $q5,
+			'q6' => $q6,
+			'q7' => $q7,
+			'q8' => $q8,
+			'q9' => $q9,
+			'q10' => $q10,
+			'q11' => $q11,
+			'q12' => $q12,
+			'q13' => $q13,
+			'q14' => $q14
+		);
+
+		$insert_data = $this->Crud->insert('tbl_kuisioner', $data);
+
+		if ($insert_data > 0) {
+
+			$response = ['status' => 'success', 'message' => 'Berhasil Tambah Data!'];
+		} else
+			$response = ['status' => 'error', 'message' => 'Gagal Tambah Data!'];
+
+		echo json_encode($response);
+	}
 }

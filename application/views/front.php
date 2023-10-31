@@ -379,7 +379,7 @@
           <div class="col-lg-6 text-center text-lg-start">
             <h6 class="h2 text-primary fw-bold mb-1">Self Asessment Kesehatan Mental</h6>
             <p class="fw-medium mb-4">Chek status kesehatan mental Anda</p>
-            <a href="payment-page.html" class="btn btn-lg btn-primary">Mulai Sekarang</a>
+            <a href="<?= base_url('front/asessment') ?>" class="btn btn-lg btn-primary">Mulai Sekarang</a>
           </div>
           <div class="col-lg-6 pt-lg-5 text-center text-lg-end">
             <img src="<?= base_url('assets/') ?>assets/img/front-pages/landing-page/assesment.png" alt="assesment" class="img-fluid" />

@@ -84,7 +84,15 @@
                         <!-- Users List Table -->
                         <div class="card">
                             <div class="card-header border-bottom" style="text-align: right;">
-                                <button class="btn btn-sm btn-danger" onclick="tambaho()"><i class="ti ti-users"></i> Tambah Konselor</button>
+                                <div class="d-flex justify-content-between">
+                                    <div>
+                                        <h4>Data Konselor</h4>
+                                    </div>
+                                    <div>
+                                        <button class="btn btn-sm btn-danger" onclick="tambaho()"><i class="ti ti-users"></i> Tambah Konselor</button>
+                                    </div>
+                                </div>
+
                             </div>
                             <div class="card-datatable table-responsive">
                                 <table id="table-konselor" class="table">
