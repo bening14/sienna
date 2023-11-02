@@ -36,6 +36,18 @@
             </a>
         </li>
         <li class="menu-item">
+            <a href="<?= base_url('dashboard/request') ?>" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-heart-handshake"></i>
+                <div data-i18n="Request Buku">Request Buku</div>
+            </a>
+        </li>
+        <li class="menu-item">
+            <a href="<?= base_url('dashboard/komentar') ?>" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-message"></i>
+                <div data-i18n="Komentar">Komentar</div>
+            </a>
+        </li>
+        <li class="menu-item">
             <a href="<?= base_url('dashboard/konselor') ?>" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-users"></i>
                 <div data-i18n="Konselor">Konselor</div>
@@ -47,6 +59,7 @@
                 <div data-i18n="Artikel">Artikel</div>
             </a>
         </li>
+
         <li class="menu-item">
             <a href="<?= base_url('dashboard/bibliotherapy') ?>" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-brand-hipchat"></i>

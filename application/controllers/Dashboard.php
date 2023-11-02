@@ -134,6 +134,16 @@ class Dashboard extends CI_Controller
         $this->load->view('ebook');
     }
 
+    public function request()
+    {
+        $this->load->view('request');
+    }
+
+    public function komentar()
+    {
+        $this->load->view('komentar');
+    }
+
     public function ajax_table_book()
     {
         $table = 'tbl_book'; //nama tabel dari database
@@ -153,6 +163,77 @@ class Dashboard extends CI_Controller
             $row['data']['penulis'] = $key->penulis;
             $row['data']['cover'] = $key->cover;
             $row['data']['deskripsi'] = $key->deskripsi;
+            $row['data']['date_created'] = date('d-M-Y', strtotime($key->date_created));
+
+            $data[] = $row;
+        }
+
+        $output = array(
+            "draw" => $_POST['draw'],
+            "recordsTotal" => $this->crud->count_all($table),
+            "recordsFiltered" => $this->crud->count_filtered($table, $select, $column_order, $column_search, $order),
+            "data" => $data,
+            "query" => $this->db->last_query()
+        );
+        //output to json format
+        echo json_encode($output);
+    }
+    public function ajax_table_request()
+    {
+        $table = 'tbl_request_buku'; //nama tabel dari database
+        $column_order = array('id', 'nama', 'fakultas', 'jurusan', 'email', 'judul_buku', 'date_created'); //field yang ada di table user
+        $column_search = array('id', 'nama', 'fakultas', 'jurusan', 'email', 'judul_buku', 'date_created'); //field yang diizin untuk pencarian 
+        $select = 'id, nama, fakultas, jurusan, email, judul_buku, date_created';
+        $order = array('id' => 'asc'); // default order 
+        $list = $this->crud->get_datatables($table, $select, $column_order, $column_search, $order);
+        $data = array();
+        $no = $_POST['start'];
+        foreach ($list as $key) {
+            $no++;
+            $row = array();
+            $row['data']['no'] = $no;
+            $row['data']['id'] = $key->id;
+            $row['data']['nama'] = $key->nama;
+            $row['data']['fakultas'] = $key->fakultas;
+            $row['data']['jurusan'] = $key->jurusan;
+            $row['data']['email'] = $key->email;
+            $row['data']['judul_buku'] = $key->judul_buku;
+            $row['data']['date_created'] = date('d-M-Y', strtotime($key->date_created));
+
+            $data[] = $row;
+        }
+
+        $output = array(
+            "draw" => $_POST['draw'],
+            "recordsTotal" => $this->crud->count_all($table),
+            "recordsFiltered" => $this->crud->count_filtered($table, $select, $column_order, $column_search, $order),
+            "data" => $data,
+            "query" => $this->db->last_query()
+        );
+        //output to json format
+        echo json_encode($output);
+    }
+
+    public function ajax_table_komentar()
+    {
+        $table = 'tbl_komentar'; //nama tabel dari database
+        $column_order = array('id', 'nama', 'fakultas', 'jurusan', 'komentar', 'judul_buku', 'date_created'); //field yang ada di table user
+        $column_search = array('id', 'nama', 'fakultas', 'jurusan', 'komentar', 'judul_buku', 'date_created'); //field yang diizin untuk pencarian 
+        $select = 'id, nama, fakultas, jurusan, komentar, judul_buku, date_created';
+        $order = array('id' => 'asc'); // default order 
+        $list = $this->crud->get_datatables($table, $select, $column_order, $column_search, $order);
+        $data = array();
+        $no = $_POST['start'];
+        foreach ($list as $key) {
+            $no++;
+            $row = array();
+            $row['data']['no'] = $no;
+            $row['data']['id'] = $key->id;
+            $row['data']['nama'] = $key->nama;
+            $row['data']['fakultas'] = $key->fakultas;
+            $row['data']['jurusan'] = $key->jurusan;
+            $row['data']['komentar'] = $key->komentar;
+            $row['data']['judul_buku'] = $key->judul_buku;
             $row['data']['date_created'] = date('d-M-Y', strtotime($key->date_created));
 
             $data[] = $row;

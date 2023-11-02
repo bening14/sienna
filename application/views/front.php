@@ -353,7 +353,7 @@
           <?php
           foreach ($konselor as $row => $val) {
           ?>
-            <div class="col-lg-3 col-sm-6">
+            <div class="col-lg-3 col-sm-6 mb-4">
               <div class="card mt-3 mt-lg-0 shadow-none">
                 <div class="bg-label-primary position-relative team-image-box">
                   <img src="<?= base_url('assets/konselor/' . $val['gambar']) ?>" class="position-absolute card-img-position bottom-0 start-50 scaleX-n1-rtl" alt="konselor" />
@@ -408,7 +408,7 @@
               <div class="card">
                 <div class="card-header">
                   <div class="text-left">
-                    <img src="<?= base_url('assets/assets/img/artikel/' . $d['cover']) ?>" alt="artikel kesehatan mental" class="mb-4 pb-2 img-fluid" />
+                    <img src="<?= base_url('assets/artikel/' . $d['cover']) ?>" alt="artikel kesehatan mental" class="mb-4 pb-2 img-fluid" />
                     <small>Posted : <?= date('d-M-Y H:i:s', strtotime($d['date_created'])) ?></small><br>
                     <small>Oleh : <?= $d['posting_oleh'] ?></small>
                     <h5 class="mb-3 mt-2"><?= $d['judul'] ?></h5>

@@ -130,4 +130,75 @@ class Front extends CI_Controller
 
 		echo json_encode($response);
 	}
+
+	public function bukudetil()
+	{
+
+		$this->load->model("Crud", "crud");
+
+		$data['buku'] = $this->crud->get_where('tbl_book', ['id' => $this->uri->segment('3')])->row_array();
+		$data['komentar'] = $this->crud->get_where('tbl_komentar', ['id_tbl_book' => $this->uri->segment('3')])->result_array();
+
+		$this->load->view('bukudetil', $data);
+	}
+
+	public function insert_request_buku()
+	{
+		$this->load->model("Crud", "crud");
+
+		$table = $this->input->post("table");
+
+
+		$data = $this->input->post();
+
+
+		unset($data['table']);
+		//ambil info judul buku
+		$where = array(
+			'id' => $data['id_tbl_book']
+		);
+		$r = $this->crud->get_where('tbl_book', $where)->row_array();
+
+		$data['judul_buku'] = $r['judul_buku'];
+
+		$insert_data = $this->crud->insert($table, $data);
+
+
+		if ($insert_data > 0) {
+			$response = ['status' => 'success', 'message' => 'Berhasil submit Data!'];
+		} else
+			$response = ['status' => 'error', 'message' => 'Gagal submit Data!'];
+
+		echo json_encode($response);
+	}
+
+	public function insert_komentar()
+	{
+		$this->load->model("Crud", "crud");
+
+		$table = $this->input->post("table");
+
+
+		$data = $this->input->post();
+
+
+		unset($data['table']);
+		//ambil info judul buku
+		$where = array(
+			'id' => $data['id_tbl_book']
+		);
+		$r = $this->crud->get_where('tbl_book', $where)->row_array();
+
+		$data['judul_buku'] = $r['judul_buku'];
+
+		$insert_data = $this->crud->insert($table, $data);
+
+
+		if ($insert_data > 0) {
+			$response = ['status' => 'success', 'message' => 'Berhasil submit Data!'];
+		} else
+			$response = ['status' => 'error', 'message' => 'Gagal submit Data!'];
+
+		echo json_encode($response);
+	}
 }

@@ -35,6 +35,7 @@
     <!-- Page CSS -->
 
     <link rel="stylesheet" href="<?= base_url('assets/') ?>assets/vendor/css/pages/front-page-landing.css" />
+    <link rel="stylesheet" href="<?= base_url('assets/') ?>assets/vendor/libs/sweetalert2/sweetalert2.css" />
 
     <!-- Helpers -->
     <script src="<?= base_url('assets/') ?>assets/vendor/js/helpers.js"></script>
@@ -149,43 +150,103 @@
                 <!-- <div class="text-center mb-3 pb-1">
                     <span class="badge bg-label-primary">Artikel</span>
                 </div> -->
-                <h1 class="text-center mb-1 mt-5"><span class="section-title">Artikel</span> Kesehatan Mental</h1>
+                <h1 class="text-center mb-1 mt-5"><span class="section-title">Buku</span> Kesehatan Mental</h1>
                 <p class="text-center mb-5 pb-3">
-                    Tips & Trik dan story yang dapat membantu Anda untuk menjaga kesehatan mental.
+                    Rekomendasi Buku-buku Literasi Kesehatan Mental.
                 </p>
                 <div class="row gy-4 pt-lg-3">
 
 
-                    <!-- <div class="col-xl-8 col-lg-8">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4>Hasil Pencarian</h4>
-                            </div>
-                            <div class="card-body">
-                                <p style="text-align: center;font-style:italic;">Tidak ada artikel yang ditemukan!</p>
-                            </div>
-                        </div>
-                    </div> -->
-
-
-
                     <!-- artikel -->
-                    <div class="col-xl-8 col-lg-8">
+                    <div class="col-xl-12 col-lg-12">
                         <div class="card">
-                            <div id="kolomartikel">
+                            <div>
                                 <div class="card-header">
-                                    <div class="text-left">
-                                        <img src="<?= base_url('assets/artikel/' . $artikel['cover']) ?>" alt="artikel kesehatan mental" class="mb-4 pb-2 img-fluid" />
-                                        <small>Posted : <?= date('d-M-Y H:i:s', strtotime($artikel['date_created'])) ?></small><br>
-                                        <small>Oleh : <?= $artikel['posting_oleh'] ?></small>
-                                        <h3 class="mb-3 mt-2"><?= $artikel['judul'] ?></h3>
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <img src="<?= base_url('assets/ebook/book1.jpg') ?>" alt="ebook" class="mb-4 pb-2 img-fluid" />
+                                        </div>
+                                        <div class="col-8">
+                                            <h2><?= $buku['judul_buku'] ?></h2>
+                                            <h5 class="mb-4 mt-0"><strong>Penulis:</strong> Muthia Sayekti</h5>
+
+                                            <p><?= $buku['deskripsi'] ?></p>
+                                            <hr>
+                                            <p><strong>Mau dapat buku ini, silahkan isikan biodata dan email Anda dibawah ini</strong></p>
+                                            <div class="row">
+                                                <form id="form-data" class="row g-3">
+                                                    <div class="col-6 col-md-6 mt-3">
+                                                        <input type="text" id="nama" name="nama" placeholder="Nama" class="form-control" />
+                                                    </div>
+                                                    <div class="col-6 col-md-6 mt-3">
+                                                        <input type="text" id="fakultas" name="fakultas" placeholder="Fakultas" class="form-control" />
+                                                    </div>
+                                                    <div class="col-6 col-md-6 mt-3">
+                                                        <input type="text" id="jurusan" name="jurusan" placeholder="Jurusan" class="form-control" />
+                                                    </div>
+                                                    <div class="col-6 col-md-6 mt-3">
+                                                        <input type="email" id="email" name="email" placeholder="Email" class="form-control" />
+                                                    </div>
+                                                    <div class="d-grid gap-2 mt-4 mb-4">
+                                                        <button class="btn btn-primary" type="submit">Submit</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
+                                        <hr>
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <p><?= $artikel['uraian'] ?></p>
-                                    <div style="text-align: center;" class="mt-5">
-                                        <a href="<?= base_url('#artikel') ?>" class="btn btn-success text-center">Kembali ke Beranda</a>
+                                    <h4 class="mb-4">Komentar mereka yang telah membaca buku ini</h4>
+                                    <?php
+                                    foreach ($komentar as $key => $value) {
+                                    ?>
+
+                                        <p><?= $value['komentar'] ?></p>
+                                        <p><strong><?= $value['nama'] . ', ' . $value['fakultas'] . ', ' . $value['jurusan'] ?></strong></p>
+                                        <hr>
+                                    <?php
+                                    }
+                                    ?>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card mt-4">
+                            <div>
+                                <div class="card-header">
+                                    <div class="row">
+                                        <div class="col-xl-12 col-lg-12">
+                                            <h4> Kolom Komentar</h4>
+                                            <p>Bagaimana buku ini telah membantumu? Tulis pengalamanmu setelah membaca buku ini:</p>
+                                        </div>
+                                        <div class="row">
+                                            <form id="form-data-komentar" class="row g-3">
+                                                <div class="col-6 col-md-6 mt-3">
+                                                    <input type="text" id="nama_k" name="nama_k" placeholder="Nama" class="form-control" />
+                                                </div>
+                                                <div class="col-6 col-md-6 mt-3">
+                                                    <input type="text" id="fakultas_k" name="fakultas_k" placeholder="Fakultas" class="form-control" />
+                                                </div>
+                                                <div class="col-12 col-md-12 mt-3">
+                                                    <input type="text" id="jurusan_k" name="jurusan_k" placeholder="Jurusan" class="form-control" />
+                                                </div>
+                                                <div class="col-12 col-md-12 mt-3">
+                                                    <textarea name="komentar" id="komentar" cols="30" rows="5" placeholder="Komentar" class="form-control"></textarea>
+                                                </div>
+                                                <div class="col-12 col-md-12 text-center mt-4">
+                                                    <button class="btn btn-danger" type="submit">Submit</button>
+                                                </div>
+                                            </form>
+                                        </div>
+
                                     </div>
+                                </div>
+                                <div class="card-body">
+
                                 </div>
                             </div>
                         </div>
@@ -193,45 +254,7 @@
                     </div>
                     <!-- artikel -->
 
-                    <!-- artikel -->
-                    <div class="col-xl-4 col-lg-4">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4>Artikel Terkait</h4>
-                                <form id="form-search" class="row g-3">
-                                    <div class="input-wrapper my-3 input-group input-group-lg input-group-merge position-relative mx-auto">
-                                        <span class="input-group-text" id="basic-addon1"><i class="ti ti-search"></i></span>
-                                        <input type="text" id="cari" name="cari" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="basic-addon1" />
-                                    </div>
-                                    <div style="display: none;">
-                                        <button type="submit" class="btn btn-primary me-sm-3 me-1">Submit</button>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="card-body">
-                                <?php
-                                foreach ($child as $key => $value) {
-                                ?>
-                                    <div class="row">
-                                        <div class="col-xl-4 col-lg-4">
-                                            <img src="<?= base_url('assets/artikel/' . $value['cover']) ?>" alt="artikel kesehatan mental" class="mb-4 pb-2 img-fluid" />
-                                        </div>
-                                        <div class="col-xl-8 col-lg-8">
-                                            <a href="<?= base_url('front/artikel/' . $value['id']) ?>">
-                                                <h6 class="mb-1"><?= $value['judul'] ?></h6>
-                                            </a>
-                                            <small>Posted : <?= date('d-M-Y H:i:s', strtotime($value['date_created'])) ?></small>
-                                        </div>
-                                    </div>
-                                <?php
-                                }
-                                ?>
 
-                                <small style="font-style: italic;">Tags : Kesehatan Mental, Bibliotherapy</small>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- artikel -->
 
 
 
@@ -346,6 +369,7 @@
     <!-- Vendors JS -->
     <script src="<?= base_url('assets/') ?>assets/vendor/libs/nouislider/nouislider.js"></script>
     <script src="<?= base_url('assets/') ?>assets/vendor/libs/swiper/swiper.js"></script>
+    <script src="<?= base_url('assets/') ?>assets/vendor/libs/sweetalert2/sweetalert2.js"></script>
 
     <!-- Main JS -->
     <script src="<?= base_url('assets/') ?>assets/js/front-main.js"></script>
@@ -357,16 +381,31 @@
 </html>
 
 <script>
-    $("#form-search").submit(function(e) {
-        var a = ''
-        var b = ''
+    $("#form-data").submit(function(e) {
         e.preventDefault()
 
-        var form_data = new FormData();
-        form_data.append('table', 'tbl_artikel');
-        form_data.append('cari', $("#cari").val());
+        if ($('#nama').val() == '' || $('#fakultas').val() == '' || $('#jurusan').val() == '' || $('#email').val() == '') {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Tidak boleh ada kolom kosong!',
+                customClass: {
+                    confirmButton: 'btn btn-primary'
+                },
+                buttonsStyling: false
+            })
+            return
+        }
 
-        var url_ajax = '<?= base_url() ?>front/cari_artikel'
+        var form_data = new FormData();
+        form_data.append('table', 'tbl_request_buku');
+        form_data.append('nama', $("#nama").val());
+        form_data.append('fakultas', $("#fakultas").val());
+        form_data.append('jurusan', $("#jurusan").val());
+        form_data.append('email', $("#email").val());
+        form_data.append('id_tbl_book', '<?= $this->uri->segment('3') ?>');
+
+        var url_ajax = '<?= base_url() ?>front/insert_request_buku'
 
         $.ajax({
             url: url_ajax,
@@ -378,40 +417,142 @@
             dataType: "json",
             success: function(result) {
                 if (result.status == "success") {
-                    result.data.forEach(d => {
-                        b = `<div class="card-header">
-                                <h4>Hasil Pencarian</h4>
-                            </div>`
-                        a += ` 
-                            <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-xl-4 col-lg-4">
-                                            <img src="<?= base_url('assets/artikel/') ?>` + d['cover'] + `" alt="artikel kesehatan mental" class="mb-4 pb-2 img-fluid" />
-                                        </div>
-                                        <div class="col-xl-8 col-lg-8">
-                                            <a href="<?= base_url('front/artikel/') ?>` + d['id'] + `">
-                                                <h6 class="mb-1">` + d['judul'] + `</h6>
-                                            </a>
-                                            <small>Posted : ` + d['date_created'] + `</small><br>
-                                            <small>Oleh : ` + d['posting_oleh'] + `</small>
-                                            <p class="mt-3">` + d['uraian'].substring(0, 200) + `</p>
-                                        </div>
-                                    </div>
-                            </div>`
-                    });
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'berhasil submit data',
+                        showConfirmButton: false,
+                        timer: 1500,
+                        customClass: {
+                            confirmButton: 'btn btn-primary'
+                        },
+                        buttonsStyling: false
+                    })
 
-                    $('#kolomartikel').html(b + a)
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Sukses!',
+                        text: 'Anda berhasil submit data, Setelah melakukan verifikasi, kami akan mengirimkan ebook melalui email, silahkan cek secara berkala email Anda.',
+                        customClass: {
+                            confirmButton: 'btn btn-success'
+                        }
+                    })
+
+                    $('#nama').val('')
+                    $('#fakultas').val('')
+                    $('#jurusan').val('')
+                    $('#email').val('')
+
                 } else {
-                    b = `<div class="card-header">
-                                <h4>Hasil Pencarian</h4>
-                            </div>`
-                    a = `<div class="card-body">
-                                <p style="text-align: center;font-style:italic;">Tidak ada artikel yang ditemukan!</p>
-                            </div>`
-
-                    $('#kolomartikel').html(b + a)
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Gagal submit data',
+                        customClass: {
+                            confirmButton: 'btn btn-primary'
+                        },
+                        buttonsStyling: false
+                    })
                 }
+            },
+            error: function(err) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Telah terjadi kesalahan, silahkan contact CS',
+                    customClass: {
+                        confirmButton: 'btn btn-primary'
+                    },
+                    buttonsStyling: false
+                })
+            }
+        })
+    })
 
+    $("#form-data-komentar").submit(function(e) {
+        e.preventDefault()
+
+        if ($('#nama_k').val() == '' || $('#fakultas_k').val() == '' || $('#jurusan_k').val() == '' || $('#komentar').val() == '') {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Tidak boleh ada kolom kosong!',
+                customClass: {
+                    confirmButton: 'btn btn-primary'
+                },
+                buttonsStyling: false
+            })
+            return
+        }
+
+        var form_data = new FormData();
+        form_data.append('table', 'tbl_komentar');
+        form_data.append('nama', $("#nama_k").val());
+        form_data.append('fakultas', $("#fakultas_k").val());
+        form_data.append('jurusan', $("#jurusan_k").val());
+        form_data.append('komentar', $("#komentar").val());
+        form_data.append('id_tbl_book', '<?= $this->uri->segment('3') ?>');
+
+        var url_ajax = '<?= base_url() ?>front/insert_komentar'
+
+        $.ajax({
+            url: url_ajax,
+            type: "post",
+            cache: false,
+            contentType: false,
+            processData: false,
+            data: form_data,
+            dataType: "json",
+            success: function(result) {
+                if (result.status == "success") {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'berhasil submit data',
+                        showConfirmButton: false,
+                        timer: 1500,
+                        customClass: {
+                            confirmButton: 'btn btn-primary'
+                        },
+                        buttonsStyling: false
+                    })
+
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Sukses!',
+                        text: 'Terima kasih atas komentar Anda.',
+                        customClass: {
+                            confirmButton: 'btn btn-success'
+                        }
+                    })
+
+                    $('#nama_k').val('')
+                    $('#fakultas_k').val('')
+                    $('#jurusan_k').val('')
+                    $('#komentar').val('')
+
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Gagal submit data',
+                        customClass: {
+                            confirmButton: 'btn btn-primary'
+                        },
+                        buttonsStyling: false
+                    })
+                }
+            },
+            error: function(err) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Telah terjadi kesalahan, silahkan contact CS',
+                    customClass: {
+                        confirmButton: 'btn btn-primary'
+                    },
+                    buttonsStyling: false
+                })
             }
         })
     })
