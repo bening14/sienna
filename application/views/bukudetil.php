@@ -143,11 +143,11 @@
                                 <div class="card-header">
                                     <div class="row">
                                         <div class="col-4">
-                                            <img src="<?= base_url('assets/ebook/book1.jpg') ?>" alt="ebook" class="mb-4 pb-2 img-fluid" />
+                                            <img src="<?= base_url('assets/ebook/' . $buku['cover']) ?>" alt="ebook" class="mb-4 pb-2 img-fluid" />
                                         </div>
                                         <div class="col-8">
                                             <h2><?= $buku['judul_buku'] ?></h2>
-                                            <h5 class="mb-4 mt-0"><strong>Penulis:</strong> Muthia Sayekti</h5>
+                                            <h5 class="mb-4 mt-0"><strong>Penulis:</strong> <?= $buku['penulis'] ?></h5>
 
                                             <p><?= $buku['deskripsi'] ?></p>
                                             <hr>
