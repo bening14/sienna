@@ -477,7 +477,7 @@
                     "data": "data",
                     "render": function(data) {
                         return `<div class="d-flex align-items-center">
-                                    <a href="javascript:;" class="text-body" onclick="edito('` + data.id + `','` + data.judul + `','` + data.posting_oleh + `','` + data.uraian + `')"><i class="ti ti-edit ti-sm me-2"></i></a>
+                                    <a href="javascript:;" class="text-body" onclick="edito('` + data.id + `','` + data.judul + `','` + data.posting_oleh + `')"><i class="ti ti-edit ti-sm me-2"></i></a>
                                     <a href="javascript:;" class="text-body delete-record" onclick="delete_data('` + data.id + `')"><i class="ti ti-trash ti-sm mx-2"></i></a>
                                     
                                 </div>`
