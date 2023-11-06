@@ -248,9 +248,9 @@
                     </div>
                     <div class="col-lg-5 col-md-8 col-sm-6">
                         <h6 class="footer-title mb-4">Hubungi Kami</h6>
-                        <h6 class="text-white">FIP Universitas Negeri Malang</h6>
-                        <div class="text-white">Jl. Semarang 5 Malang, 65145<br><br>CP. Khairul Bariyyah<br>
-                            +62 819 3798 1282</div>
+                        <h6 class="text-white">Pusat Bimbingan Konseling,<br> Karir dan Kewirausahaan (PBK3)</h6>
+                        <div class="text-white">Universitas Negeri Malang<br>Gedung B17 Lantai 1<br>
+                            +62 896-7202-2456</div>
                     </div>
 
                 </div>
